@@ -82,8 +82,12 @@ class Auth
                 session_start();
                 $_SESSION['id'] = $rows['id'];
                 $_SESSION['role'] = $rows['role'];
+
+                return true;
             }
         }
+
+        return false;
     }
 
     public function logout()
