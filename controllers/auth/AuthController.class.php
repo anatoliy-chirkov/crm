@@ -8,21 +8,18 @@ class AuthController
 
         $auth = new Auth;
 
-        if ($_SESSION['id']) {
+        if ($_POST['logout']) {
+            $auth->logout();
+            $this->getStartView();
+        } else if ($_POST['auth']) {
+            $auth->signIn($_POST);
+            $this->getStartView();
+        } else if ($_SESSION['id']) {
             $this->getStartView();
         } else if ($auth->signInAuto()) {
             $this->getStartView();
-        } else if ($_POST['auth']) {
-            if ($auth->signIn($_POST)) {
-                $this->getStartView();
-            } else {
-                //test
-                $path = 'views/items/orders/index.php';
-                include('views/template/template2.php');
-            }
         } else {
-            $path = 'views/items/auth/index.php';
-            include('views/template/index.php');
+            $this->getStartView();
         }
     }
 
@@ -52,6 +49,11 @@ class AuthController
             $menu = 'views/menu/admin/index.php';
             $path = 'views/items/orders/index.php';
             include('views/template/template2.php');
+
+        } else {
+
+            $path = 'views/items/auth/index.php';
+            include('views/template/index.php');
 
         }
     }

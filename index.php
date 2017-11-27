@@ -1,7 +1,7 @@
 <?php
 
-require('lib/autoloader.class.php');
+require('models/autoloader.php');
 
-if ($_SERVER['REQUEST_URI'] == '/')
-    (new AuthController)->auth();
+
+(new AuthController)->auth();
 

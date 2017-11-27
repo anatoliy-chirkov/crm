@@ -4,7 +4,7 @@ class AuthChecker
 {
     public function isHr()
     {
-        if ($_SESSION['role'] === 3)
+        if ($_SESSION['role'] == 3)
             return true;
 
         return false;
@@ -12,7 +12,7 @@ class AuthChecker
 
     public function isMaster()
     {
-        if ($_SESSION['role'] === 1)
+        if ($_SESSION['role'] == 1)
             return true;
 
         return false;
@@ -20,7 +20,7 @@ class AuthChecker
 
     public function isOperator()
     {
-        if ($_SESSION['role'] === 2)
+        if ($_SESSION['role'] == 2)
             return true;
 
         return false;
@@ -28,7 +28,7 @@ class AuthChecker
 
     public function isAdmin()
     {
-        if ($_SESSION['role'] === 4)
+        if ($_SESSION['role'] == 4)
             return true;
 
         return false;

@@ -42,7 +42,7 @@ class Auth
     {
         $data = UserDAO::me()->parseForm($form);
 
-        $sql = "select id, login, password from users where login = $data->login";
+        $sql = "SELECT id, login, password, role FROM users WHERE login = '".$data->login."'";
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();
@@ -92,11 +92,11 @@ class Auth
 
     public function logout()
     {
+        setcookie("id", "", time()-3600*24*30*12, "/");
         setcookie("hash", "", time()-3600*24*30*12, "/");
         session_start();
-        unset($_SESSION['session_username']);
-        unset($_SESSION['is_auth']);
-        unset($_SESSION["session_user_id"]);
+        unset($_SESSION['id']);
+        unset($_SESSION["role"]);
         session_destroy();
     }
 }

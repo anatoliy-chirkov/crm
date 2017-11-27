@@ -4,13 +4,13 @@
     {
         $className = ltrim($className, '\\');
         $dir  = array(
-            'app/calls/',
-            'app/database/',
-            'app/orders/',
-            'app/shedule/',
-            'app/users/',
-            'app/users/auth/',
-            'app/utils/',
+            'models/calls/',
+            'models/database/',
+            'models/orders/',
+            'models/shedule/',
+            'models/users/',
+            'models/users/auth/',
+            'models/utils/',
             'controllers/auth/'
             );
         $namespace = '';

@@ -26,7 +26,7 @@ class DB
 
         try {
             $this->connection = new \PDO("mysql:dbname=$dbName;host=localhost", $user, $pass);
-            $this->connection->exec('SET NAMES utf8mb4');
+            //$this->connection->exec('SET NAMES utf8mb4');
             return $this->connection;
         } catch (PDOException $e) {
             echo "Возникла ошибка соединения: ".$e->getMessage();
