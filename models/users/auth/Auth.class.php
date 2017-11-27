@@ -42,7 +42,7 @@ class Auth
     {
         $data = UserDAO::me()->parseForm($form);
 
-        $sql = "SELECT id, login, password, role FROM users WHERE login = '".$data->login."'";
+        $sql = "SELECT id, login, password, role FROM users WHERE login = '$data->login'";
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();

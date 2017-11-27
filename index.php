@@ -1,7 +1,5 @@
 <?php
 
 require('models/autoloader.php');
-
-
-(new AuthController)->auth();
+require('models/router.php');
 

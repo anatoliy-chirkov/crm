@@ -11,6 +11,7 @@
             'models/users/',
             'models/users/auth/',
             'models/utils/',
+            'controllers/',
             'controllers/auth/'
             );
         $namespace = '';
