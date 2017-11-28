@@ -1,6 +1,17 @@
 .auth {
     margin-top: 5%;
 }
+.buttons-case {
+    margin-bottom: 20px;
+}
+h2 {
+    margin-bottom: 30px;
+}
+
+.users-all-sort {
+    margin-right: 5px;
+}
+
 .main_menu {
     padding-top: 30px;
     padding-bottom: 30px;

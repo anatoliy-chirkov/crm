@@ -34,29 +34,30 @@ class AuthController
         if ($checker->isMaster()) {
 
             $menu = 'views/menu/master/points.html';
-            $path = 'views/items/orders/index.php';
+            $path = 'views/items/orders/master/index.html';
             include('views/template/main.tpl.html');
 
         } else if ($checker->isOperator()) {
 
             $menu = 'views/menu/operator/points.html';
-            $path = 'views/items/orders/index.php';
+            $path = 'views/items/orders/operator/index.html';
             include('views/template/main.tpl.html');
 
         } else if ($checker->isHr()) {
 
-            $path = 'views/items/users/index.php';
+            $menu = 'views/menu/hr/points.html';
+            $path = 'views/items/users/hr/index.html';
             include('views/template/main.tpl.html');
 
         } else if ($checker->isAdmin()) {
 
             $menu = 'views/menu/admin/points.html';
-            $path = 'views/items/orders/index.php';
+            $path = 'views/items/orders/admin/all.html';
             include('views/template/main.tpl.html');
 
         } else {
 
-            $path = 'views/items/auth/index.php';
+            $path = 'views/items/auth/index.html';
             include('views/template/auth.tpl.html');
 
         }
