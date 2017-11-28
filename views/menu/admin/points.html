@@ -1,14 +1,6 @@
-<div class="main_menu col-sm-2 panel panel-default">
-<ul>
-    <li><a class="menu_button-toggle" value="products.php" href="#">Заявки</a></li>
-    <li><a class="menu_button" value="shops.php" href="#">Звонки</a></li>
-    <li><a class="menu_button" value="slider.php" href="#">График</a></li>
-    <li><a class="menu_button" value="users.php" href="#">Профиль</a></li>
-    <li>
-        <form role="form" method="post" >
-            <input type="hidden" name="logout" value="true" />
-            <input type="submit" value="Выйти"/>
-        </form>
-    </li>
-</ul>
-</div>
+<li <?php if ($routes[1] == 'orders' || $routes[1] == null) echo 'class="active"'; ?>><a href="/orders/index">Заявки <span class="sr-only">(current)</span></a></li>
+<li <?php if ($routes[1] == 'users' & $routes[2] != 'spreaders') echo 'class="active"'; ?>><a href="/users/index">Пользователи </a></li>
+<li <?php if ($routes[1] == 'calls') echo 'class="active"'; ?>><a href="/calls/index">Звонки </a></li>
+<li <?php if ($routes[1] == 'shedule') echo 'class="active"'; ?>><a href="/shedule/index">График </a></li>
+<li <?php if ($routes[1] == 'news') echo 'class="active"'; ?>><a href="/news/index">Новости </a></li>
+<li <?php if ($routes[2] == 'spreaders') echo 'class="active"'; ?>><a href="/users/spreaders">Расклейщики </a></li>

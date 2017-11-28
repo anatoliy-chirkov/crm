@@ -1,0 +1,68 @@
+<div class="orders-admin-all">
+    <h2>Добавление заявки</h2>
+    <div class="buttons-case">
+        <a href="/orders/index" type="button" class="btn btn-default">Назад</a>
+    </div>
+    <form class="col-md-6 row" action="/orders/actionAdd" role="form" method="POST">
+        <div class="form-group">
+            <label for="input1" class="control-label">Имя клиента</label>
+                <input name="name" type="text" class="form-control" id="input1" placeholder="Сергей">
+        </div>
+        <div class="form-group">
+            <label for="input2" class=" control-label">Телефон</label>
+
+                <input name="phone" type="text" class="form-control" id="input2" placeholder="+7(999)123-45-67">
+
+        </div>
+        <div class="form-group">
+            <label for="input3" class=" control-label">Описание проблемы</label>
+
+                <input name="problem" type="text" class="form-control" id="input3" placeholder="Что-то сломалось">
+
+        </div>
+        <div class="form-group">
+            <label for="input4" class=" control-label">Материалы</label>
+
+                <input name="materials" type="text" class="form-control" id="input4">
+
+        </div>
+        <div class="form-group">
+            <label for="input5" class=" control-label">Метро</label>
+
+                <input name="area" type="text" class="form-control" id="input5">
+
+        </div>
+        <div class="form-group">
+            <label for="input6" class=" control-label">Адрес</label>
+
+                <input name="adress" type="text" class="form-control" id="input6">
+
+        </div>
+        <div class="form-group">
+            <label for="input7" class=" control-label">Назначить мастера</label>
+
+            <select name="master_id" type="text" class="form-control" id="input7">
+                <option value="0">Выберите</option>
+                <option value="2">Александр Фадеев</option>
+            </select>
+
+        </div>
+        <div class="form-group">
+            <label for="input8" class=" control-label">Статус заявки</label>
+
+            <select name="status_id" type="text" class="form-control" id="input8">
+                <option value="1">Прозвон</option>
+                <option value="2">Обработана</option>
+            </select>
+
+        </div>
+        <input name="operator_id" type="hidden" value="1">
+        <input name="order_create" type="hidden" value="123">
+
+        <div class="form-group">
+
+                <button type="submit" class="btn btn-primary">Добавить</button>
+
+        </div>
+    </form>
+</div>

@@ -8,6 +8,11 @@ h2 {
     margin-bottom: 30px;
 }
 
+table .checkbox {
+    margin: 0;
+    display: inline;
+}
+
 .users-all-sort {
     margin-right: 5px;
 }

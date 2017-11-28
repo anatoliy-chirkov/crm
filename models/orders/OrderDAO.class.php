@@ -55,23 +55,23 @@ class OrderDAO
 
     public function toString()
     {
-        return "$this->id, 
-                $this->name,
-                $this->phone,
-                $this->arrivalDate,
-                $this->arrivalTime,
-                $this->materials,
-                $this->operatorId,
-                $this->statusId,
-                $this->area,
-                $this->adress,
-                $this->problem,
-                $this->orderCreate,
-                $this->masterId,
-                $this->performanceStatusId,
-                $this->paymentStatus,
-                $this->report,
-                $this->reportDate"
+        return "'$this->id', 
+                '$this->name',
+                '$this->phone',
+                '$this->arrivalDate',
+                '$this->arrivalTime',
+                '$this->materials',
+                '$this->operatorId',
+                '$this->statusId',
+                '$this->area',
+                '$this->adress',
+                '$this->problem',
+                '$this->orderCreate',
+                '$this->masterId',
+                '$this->performanceStatusId',
+                '$this->paymentStatus',
+                '$this->report',
+                '$this->reportDate'"
             ;
     }
 }

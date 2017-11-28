@@ -15,7 +15,7 @@ class OrderBox
 
     public function getOrderCard($id)
     {
-        $sql = "select * from orders where id = $id";
+        $sql = "select * from orders where id = '$id'";
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();

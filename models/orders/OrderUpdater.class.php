@@ -19,6 +19,23 @@ class OrderUpdater
         }
     }
 
+    public function deleteOrder($form)
+    {
+        $data = OrderDAO::me()->parseForm($form);
+        //$dataString = $data->toString();
+
+        $sql = "delete from orders where id = '$data->id'";
+
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+
+        if ($res != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function updateOrderStatus($form)
     {
         $data = OrderDAO::me()->parseForm($form);
