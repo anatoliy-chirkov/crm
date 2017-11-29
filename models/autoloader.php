@@ -11,6 +11,7 @@
             'models/users/',
             'models/users/auth/',
             'models/utils/',
+            'models/spreaders/',
             'controllers/',
             'controllers/auth/'
             );

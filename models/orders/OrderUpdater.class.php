@@ -19,6 +19,23 @@ class OrderUpdater
         }
     }
 
+    public function addFileToOrder($data)
+    {
+        $path = $data['path'];
+        $id = $data['id'];
+
+        $sql = "UPDATE files SET path = '$path' WHERE order_id = '$id'";
+
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+
+        if ($res != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function deleteOrder($form)
     {
         $data = OrderDAO::me()->parseForm($form);

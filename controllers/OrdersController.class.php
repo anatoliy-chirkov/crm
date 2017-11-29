@@ -29,6 +29,30 @@ class OrdersController
         }
     }
 
+    public function addFile()
+    {
+        if ($_FILES["filename"]["size"] > 1024 * 10 * 1024) {
+            echo("Размер файла превышает 10 мегабайт");
+            return false;
+        }
+
+        $path = 'files/';
+        $ext = array_pop(explode('.', $_FILES['filename']['name']));
+        $fileName = time() . '.' . $ext;
+        $filePath = $path . $fileName;
+
+        if ($_FILES['filename']['error'] == 0) {
+            if (move_uploaded_file($_FILES['filename']['tmp_name'], $filePath)) {
+                $_POST['image_src'] = $fileName;
+                $res = (new OrderUpdater)->addFileToOrder($_POST);
+                if ($res)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
     public function actionDelete()
     {
         if ((new OrderUpdater)->deleteOrder($_POST)) {

@@ -1,29 +1,23 @@
 <?php
 
-class UsersController
+class SpreadersController
 {
     public function index()
     {
-        $path = 'views/items/users/admin/all.html';
+        $path = 'views/items/spreaders/all.html';
         include('views/template/main.tpl.html');
     }
 
     public function add()
     {
-        $path = 'views/items/users/admin/add.html';
-        include('views/template/main.tpl.html');
-    }
-
-    public function profile()
-    {
-        $path = 'views/items/users/admin/profile.html';
+        $path = 'views/items/spreaders/add.html';
         include('views/template/main.tpl.html');
     }
 
     public function actionAdd()
     {
-        if ((new Auth)->signUp($_POST)) {
-            header("Location: /users/index");
+        if ((new SpreadersBox)->addIt($_POST)) {
+            header("Location: /spreaders/index");
         }
     }
 

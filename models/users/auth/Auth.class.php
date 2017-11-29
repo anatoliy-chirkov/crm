@@ -7,31 +7,16 @@ class Auth
         $data = UserDAO::me()->parseForm($form);
 
         $sql =
-            "insert login, password, first_name, phone, role 
-              into users 
-              values ($data->login, $data->password, $data->firstName, $data->phone, $data->role)";
+            "insert into users (login, password, first_name, phone, role) 
+              values ('$data->login', '$data->password', '$data->firstName', '$data->phone', '$data->role')";
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();
 
-        if ($res != null) {
-
-            $data->id = DB::me()->getConnection()->lastInsertId();
-
-            session_start();
-            $_SESSION['id'] = $data->id;
-            $_SESSION['role'] = $data->role;
-
-            $hash = AuthUtils::generateHash();
-
-            setcookie("hash", $hash, time()+60*60*24*30, "/");
-            setcookie("id", $data->id, time()+60*60*24*30, "/");
-
+        if ($res != null)
             return true;
 
-        } else {
-            return false;
-        }
+        return false;
     }
 
     /**

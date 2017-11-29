@@ -1,21 +1,36 @@
 <div class="users-admin-all">
     <h2>Пользователи</h2>
     <div class="buttons-case">
-        <button type="button" class="users-all-sort btn btn-default">Сортировать по </button>
-        <button type="button" class="btn btn-default">Добавить пользователя</button>
+        <div class="users-all-sort form-group col-sm-2 row">
+            <select name="for_roles" class="form-control" id="input3">
+                <option value="0">Сортировка</option>
+                <option value="1">Только мастера</option>
+                <option value="2">Мастера по рейтингу</option>
+                <option value="3">Только администраторы</option>
+                <option value="4">Только HR</option>
+                <option value="4">Только операторы</option>
+            </select>
+        </div>
+        <a href="/users/add" class="btn btn-default">Добавить пользователя</a>
     </div>
     <table class="table table-striped">
         <tr>
             <th>Имя</th>
             <th>Фамилия</th>
             <th>Тип</th>
-            <th>Детали</th>
+            <th>Телефон</th>
+            <th>Заказы в работе</th>
+            <th>Рейтинг</th>
+            <th>Профиль</th>
         </tr>
         <tr>
             <td>Анатолий</td>
             <td>Чирков</td>
             <td>Администратор</td>
-            <td><a href="#">Подробнее</a></td>
+            <td>+7 (999) 735-67-61</td>
+            <td><a href="#">4 заказа</a></td>
+            <td>10,81</td>
+            <td><a href="/users/profile" class="btn btn-default">Просмотр</a></td>
         </tr>
     </table>
 </div>

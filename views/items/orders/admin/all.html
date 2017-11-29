@@ -1,6 +1,15 @@
 <div class="orders-admin-all">
     <h2>Заявки</h2>
     <div class="buttons-case">
+        <div class="users-all-sort form-group col-sm-2 row">
+            <select name="for_roles" class="form-control" id="input3">
+                <option value="0">Сортировка</option>
+                <option value="1">Не распределенные</option>
+                <option value="2">Статус прозвон</option>
+                <option value="3">В ожидании оплаты</option>
+                <option value="4">Отмененные</option>
+            </select>
+        </div>
         <a href="/orders/add" type="button" class="btn btn-default">Создать заявку</a>
     </div>
     <table class="table table-striped">
