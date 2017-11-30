@@ -7,6 +7,7 @@ class SpreadersDAO
     public $secondName;
     public $homeAdress;
     public $phone;
+    public $area;
 
     public static function me()
     {
@@ -25,6 +26,7 @@ class SpreadersDAO
         $this->secondName = $form['second_name'];
         $this->homeAdress = $form['home_adress'];
         $this->phone = $form['phone'];
+        $this->area = $form['area'];
 
         return $this;
     }

@@ -8,18 +8,33 @@ class OrderBox
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();
-        $rows = $res->fetch(PDO::FETCH_ASSOC);
+        $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
+        for ($i = 0; $rows[$i]['id'] != null; $i++) {
+            $rows[$i]['status_id'] = Enum::ORDER_STATUS[$rows[$i]['status_id']];
+
+            if ($rows[$i]['master_id'] != 0) {
+                $user = (new UserBox)->getProfile($rows[$i]['master_id']);
+                $rows[$i]['master_id'] = $user['first_name'] . $user['second_name'];
+            } else {
+                $id = $rows[$i]['id'];
+                $rows[$i]['master_id'] = '<a href="/orders/updateMaster?id='.$id.'">Определить</a>';
+            }
+        }
 
         return $rows;
     }
 
-    public function getOrderCard($id)
+    public function getOrderCard()
     {
+        $id = $_GET['id'];
         $sql = "select * from orders where id = '$id'";
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();
         $row = $res->fetch(PDO::FETCH_ASSOC);
+
+        $row['status_id'] = Enum::ORDER_STATUS[$row['status_id']];
 
         return $row;
     }

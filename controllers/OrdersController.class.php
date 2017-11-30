@@ -6,6 +6,9 @@ class OrdersController
     {
         $data = (new OrderBox)->getOrdersList();
 
+        $usersForApprove = new UserBox;
+        $usersForApprove = $usersForApprove->getUserList();
+
         $path = 'views/items/orders/admin/all.html';
         include('views/template/main.tpl.html');
     }
@@ -18,6 +21,9 @@ class OrdersController
 
     public function card()
     {
+        $data = new OrderBox;
+        $data = $data->getOrderCard();
+
         $path = 'views/items/orders/admin/card.html';
         include('views/template/main.tpl.html');
     }
@@ -27,6 +33,22 @@ class OrdersController
         if ((new OrderUpdater)->createOrder($_POST)) {
             header("Location: /orders/index");
         }
+    }
+
+    public function updateMaster()
+    {
+        $data = new UserBox;
+        $data = $data->getUserList();
+
+        $path = 'views/items/orders/admin/updateMaster.html';
+        include('views/template/main.tpl.html');
+    }
+
+    public function actionSetUser()
+    {
+        (new OrderUpdater)->setMaster();
+        header("Location: /");
+
     }
 
     public function addFile()

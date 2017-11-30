@@ -45,4 +45,24 @@ class UserDAO
 
         return $this;
     }
+
+    public function parseResult($form)
+    {
+        $this->id = $form['id'];
+        $this->login = $form['login'];
+        $this->password = $form['password'];
+        $this->hash = $form['hash'];
+        $this->login = $form['login'];
+        $this->firstName = $form['first_name'];
+        $this->secondName = $form['second_name'];
+        $this->debt = $form['debt'];
+        $this->tariff = $form['tariff'];
+        $this->phone = $form['phone'];
+        $this->email = $form['email'];
+        $this->document = $form['document'];
+        $this->homeAdress = $form['home_adress'];
+        $this->role = $form['role'];
+
+        return $this;
+    }
 }

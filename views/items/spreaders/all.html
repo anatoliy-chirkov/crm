@@ -12,13 +12,15 @@
             <th>Закрепленная территория</th>
             <th>Файлы</th>
         </tr>
-        <tr>
-            <td>Иван</td>
-            <td>Петров</td>
-            <td>+7 (926) 142-62-42</td>
-            <td><a href="#">м.Сокольники</a></td>
-            <td><a href="#">м.Сокольники</a></td>
-            <td><a href="#">Просмотр</a></td>
-        </tr>
+        <?php foreach ($data as $data): ?>
+            <tr>
+                <td><?=$data['first_name']?></td>
+                <td><?=$data['second_name']?></td>
+                <td><?=$data['phone']?></td>
+                <td><a href="#"><?=$data['home_adress']?></a></td>
+                <td><a href="#"><?=$data['area']?></a></td>
+                <td><a href="#">Просмотр</a></td>
+            </tr>
+        <?php endforeach; ?>
     </table>
 </div>

@@ -4,6 +4,9 @@ class UsersController
 {
     public function index()
     {
+        $data = new UserBox;
+        $data = $data->getUserList();
+
         $path = 'views/items/users/admin/all.html';
         include('views/template/main.tpl.html');
     }
@@ -16,6 +19,9 @@ class UsersController
 
     public function profile()
     {
+        $data = new UserBox;
+        $data = $data->getProfile();
+
         $path = 'views/items/users/admin/profile.html';
         include('views/template/main.tpl.html');
     }

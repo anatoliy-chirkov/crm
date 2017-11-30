@@ -4,6 +4,9 @@ class SpreadersController
 {
     public function index()
     {
+        $data = new SpreadersBox;
+        $data = $data->getSpreadersList();
+
         $path = 'views/items/spreaders/all.html';
         include('views/template/main.tpl.html');
     }

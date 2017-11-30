@@ -36,6 +36,22 @@ class OrderUpdater
         }
     }
 
+    public function setMaster()
+    {
+        $id = $_GET['id'];
+        $master_id = $_GET['master_id'];
+
+        $sql = "UPDATE orders SET master_id = '$master_id' WHERE id = '$id'";
+
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+
+        if ($res != null)
+            return true;
+
+        return false;
+    }
+
     public function deleteOrder($form)
     {
         $data = OrderDAO::me()->parseForm($form);

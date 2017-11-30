@@ -51,9 +51,7 @@ class AuthController
 
         } else if ($checker->isAdmin()) {
 
-            $menu = 'views/menu/admin/points.html';
-            $path = 'views/items/orders/admin/all.html';
-            include('views/template/main.tpl.html');
+            (new OrdersController)->index();
 
         } else {
 

@@ -13,6 +13,9 @@
 
         if (!empty($routes[2])) {
             $action = $routes[2];
+
+            $params = explode('?', $action);
+            $action = $params[0];
         }
 
         $controller = new $controller;

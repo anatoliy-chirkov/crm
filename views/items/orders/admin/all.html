@@ -16,60 +16,27 @@
         <tr>
             <th>#</th>
             <th>Id</th>
-            <th>Дата</th>
-            <th>Имя</th>
-            <th>Описание</th>
+            <th>Дата приезда</th>
+            <th>ФИО</th>
             <th>Адрес</th>
+            <th>Описание</th>
             <th>Мастер</th>
             <th>Статус</th>
             <th>Действия</th>
         </tr>
+        <?php foreach($data as $data): ?>
         <tr>
             <td><input type="checkbox" value=""></td>
-            <td>5</td>
-            <td>25.11.17 18:00</td>
-            <td>Сергей</td>
-            <td>Переустановить винду</td>
-            <td>Улица 1905 года</td>
-            <td><select name="master_id">
-                <option value="0">Не выбран</option>
-                <option value="2">Сан Саныч</option>
-            </select></td>
-            <td><span class="label label-danger">Позвонить</span></td>
-            <td><a href="/orders/card" class="btn btn-default">Посмотр</a></td>
+            <td><?=$data['id']?></td>
+            <td><?=$data['arrival_date']?> <?=$data['arrival_time']?></td>
+            <td><?=$data['name']?></td>
+            <td><?=$data['adress']?></td>
+            <td><?=$data['problem']?></td>
+            <td><a href="/users/profile?id=<?=$data['id']?>"><?=$data['master_id']?></a></td>
+            <td><?=$data['status_id']?></td>
+            <td><a href="/orders/card?id=<?=$data['id']?>" class="btn btn-default">Посмотр</a></td>
         </tr>
-        <tr>
-            <td><input type="checkbox" value=""></td>
-            <td>4</td>
-            <td>25.11.17 11:30</td>
-            <td>Иван</td>
-            <td>Игры не запускаются</td>
-            <td>Улица 1905 года</td>
-            <td><a href="#">Сан Саныч</a></td>
-            <td><span class="label label-success">Завершенная</span></td>
-            <td><a href="/orders/card" class="btn btn-default">Посмотр</a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value=""></td>
-            <td>3</td>
-            <td>25.11.17 10:30</td>
-            <td>Иван</td>
-            <td>Поменять видеокарту</td>
-            <td>Улица 1905 года</td>
-            <td><a href="#">Сан Саныч</a></td>
-            <td><span class="label label-danger">Позвонить</span></td>
-            <td><a href="/orders/card" class="btn btn-default">Посмотр</a></td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" value=""></td>
-            <td>2</td>
-            <td>25.11.17 10:00</td>
-            <td>Алекс</td>
-            <td>Не работает клавиатура</td>
-            <td>Улица 1905 года</td>
-            <td><a href="#">Сан Саныч</a></td>
-            <td><span class="label label-default">Отмененная</span></td>
-            <td><a href="/orders/card" class="btn btn-default">Посмотр</a></td>
-        </tr>
+        <?php endforeach; ?>
     </table>
+
 </div>
