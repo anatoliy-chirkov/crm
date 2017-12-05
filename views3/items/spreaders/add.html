@@ -1,0 +1,32 @@
+<div class="users-admin-all">
+    <h2>Добавление расклейщика</h2>
+    <div class="buttons-case">
+        <a href="/spreaders/index" type="button" class="btn btn-default">Назад</a>
+    </div>
+    <form class="col-md-6 row" action="/spreaders/actionAdd" role="form" method="POST">
+
+        <div class="form-group">
+            <label for="input4" class=" control-label">ФИО</label>
+            <input name="name" type="text" class="form-control" id="input4" placeholder="Иван">
+        </div>
+
+        <div class="form-group">
+            <label for="input3" class=" control-label">Телефон</label>
+            <input name="phone" type="text" class="form-control" id="input3" value="7" maxlength="11">
+        </div>
+
+        <div class="form-group">
+            <label for="input2" class=" control-label">Адрес проживания</label>
+            <input name="home_adress" type="text" class="form-control" id="input2" placeholder="м.Выставочная">
+        </div>
+
+        <div class="form-group">
+            <label for="input5" class=" control-label">Закрепленная территория</label>
+            <input name="area" type="text" class="form-control" id="input5" placeholder="м.Выставочная">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </div>
+    </form>
+</div>

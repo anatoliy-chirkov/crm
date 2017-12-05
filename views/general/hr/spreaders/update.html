@@ -1,0 +1,33 @@
+<div class="users-admin-all">
+    <h2>Изменить карточку расклейщика</h2>
+    <div class="buttons-case">
+        <a href="/spreaders/index" type="button" class="btn btn-default">Назад</a>
+    </div>
+    <form class="col-md-6 row" action="/spreaders/actionUpdate" role="form" method="POST">
+
+        <input name="id" type="hidden" value="<?=$data['id']?>">
+        <div class="form-group">
+            <label for="input4" class=" control-label">ФИО</label>
+            <input name="name" type="text" class="form-control" id="input4" value="<?=$data['name']?>">
+        </div>
+
+        <div class="form-group">
+            <label for="input3" class=" control-label">Телефон</label>
+            <input name="phone" type="text" class="form-control" id="input3" value="<?=$data['phone']?>">
+        </div>
+
+        <div class="form-group">
+            <label for="input2" class=" control-label">Адрес проживания</label>
+            <input name="home_adress" type="text" class="form-control" id="input2" value="<?=$data['home_adress']?>">
+        </div>
+
+        <div class="form-group">
+            <label for="input5" class=" control-label">Закрепленная территория</label>
+            <input name="area" type="text" class="form-control" id="input5" value="<?=$data['area']?>">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+    </form>
+</div>

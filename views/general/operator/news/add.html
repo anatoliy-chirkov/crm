@@ -1,0 +1,33 @@
+<div class="users-admin-all">
+    <h2>Добавление новости</h2>
+    <div class="buttons-case">
+        <a href="/news/index" type="button" class="btn btn-default">Назад</a>
+    </div>
+    <form class="col-md-6 row" action="/news/actionAdd" role="form" method="POST">
+
+        <div class="form-group">
+            <label for="input4" class=" control-label">Заголовок</label>
+            <input name="title" type="text" class="form-control" id="input4" placeholder="Иван">
+        </div>
+
+        <div class="form-group">
+            <label for="input1" class="control-label">Текст</label>
+            <textarea id="input1" name="body" class="form-control" rows="3" placeholder="Результат прозвона"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="input3" class=" control-label">Кому будет видна новость</label>
+            <select name="for_roles" class="form-control" id="input3">
+                <option value="0">Всем</option>
+                <option value="1">Только для мастеров</option>
+                <option value="2">Только для администраторов</option>
+                <option value="3">Только для операторов</option>
+                <option value="4">Только для HR</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </div>
+    </form>
+</div>

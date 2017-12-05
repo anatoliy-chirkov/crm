@@ -6,9 +6,6 @@ class OrdersController
     {
         $data = (new OrderBox)->getOrdersList();
 
-        $usersForApprove = new UserBox;
-        $usersForApprove = $usersForApprove->getUserList();
-
         $path = 'views/items/orders/admin/all.html';
         include('views/template/main.tpl.html');
     }
@@ -51,21 +48,21 @@ class OrdersController
 
     }
 
-    public function addFile()
+    public function actionAddFile()
     {
-        if ($_FILES["filename"]["size"] > 1024 * 10 * 1024) {
+        if ($_FILES["file"]["size"] > 1024 * 10 * 1024) {
             echo("Размер файла превышает 10 мегабайт");
             return false;
         }
 
         $path = 'files/';
-        $ext = array_pop(explode('.', $_FILES['filename']['name']));
+        $ext = array_pop(explode('.', $_FILES['file']['name']));
         $fileName = time() . '.' . $ext;
         $filePath = $path . $fileName;
 
-        if ($_FILES['filename']['error'] == 0) {
-            if (move_uploaded_file($_FILES['filename']['tmp_name'], $filePath)) {
-                $_POST['image_src'] = $fileName;
+        if ($_FILES['file']['error'] == 0) {
+            if (move_uploaded_file($_FILES['file']['tmp_name'], $filePath)) {
+                $_POST['path'] = $fileName;
                 $res = (new OrderUpdater)->addFileToOrder($_POST);
                 if ($res)
                     return true;

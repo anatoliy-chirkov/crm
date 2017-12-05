@@ -1,0 +1,38 @@
+<div class="users-admin-all">
+    <h2>Пользователи</h2>
+    <div class="buttons-case">
+        <div class="users-all-sort form-group col-sm-2 row">
+            <select name="for_roles" class="form-control" id="input3">
+                <option value="0">Сортировка</option>
+                <option value="1">Только мастера</option>
+                <option value="2">Мастера по рейтингу</option>
+                <option value="3">Только администраторы</option>
+                <option value="4">Только HR</option>
+                <option value="4">Только операторы</option>
+            </select>
+        </div>
+        <a href="/users/add" class="btn btn-default">Добавить пользователя</a>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Тип</th>
+            <th>Телефон</th>
+            <th>Заказы в работе</th>
+            <th>Рейтинг</th>
+            <th>Профиль</th>
+        </tr>
+        <?php foreach ($data as $data): ?>
+            <tr>
+                <td><?=$data['first_name']?></td>
+                <td><?=$data['second_name']?></td>
+                <td><?=$data['role']?></td>
+                <td><?=$data['phone']?></td>
+                <td><a href="#">4 заказа</a></td>
+                <td>10,81</td>
+                <td><a href="/users/profile?id=<?=$data['id']?>" class="btn btn-default">Просмотр</a></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

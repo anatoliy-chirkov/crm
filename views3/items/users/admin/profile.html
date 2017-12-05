@@ -1,0 +1,35 @@
+<div class="orders-admin-all">
+    <h2><?=$data['role']?> <?=$data['first_name']?> <?=$data['second_name']?></h2>
+    <div class="buttons-case">
+        <a href="/users/index" type="button" class="btn btn-default">Назад</a>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Логин</th><td><?=$data['login']?></td>
+        </tr>
+        <tr>
+            <th>Имя</th><td><?=$data['first_name']?></td>
+        </tr>
+        <tr>
+            <th>Фамилия</th><td><?=$data['second_name']?></td>
+        </tr>
+        <tr>
+            <th>Телефон</th><td><?=$data['phone']?></td>
+        </tr>
+        <tr>
+            <th>Ставка</th><td><?=$data['tariff']?></td>
+        </tr>
+        <tr>
+            <th>Долг в офис</th><td><?=$data['debt']?></td>
+        </tr>
+        <tr>
+            <th>Домашний адрес</th><td><?=$data['home_adress']?></td>
+        </tr>
+        <tr>
+            <th>Email</th><td><?=$data['email']?></td>
+        </tr>
+        <tr>
+            <th>Документы</th><td><?=$data['document']?></td>
+        </tr>
+    </table>
+</div>

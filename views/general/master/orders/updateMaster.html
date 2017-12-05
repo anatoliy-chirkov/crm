@@ -1,0 +1,21 @@
+<div class="orders-admin-choiceMaster">
+    <br>
+    <div class="buttons-case">
+        <a href="/orders/index" type="button" class="btn btn-default">Назад</a>
+    </div>
+    <br>
+<h4>Выберите мастера для выполнения этой заявки</h4>
+    <br><br>
+    <div class="col-sm-8 row">
+    <table class="table">
+        <?php foreach ($data as $data): ?>
+        <tr>
+            <td><?=$data['first_name']?> <?=$data['second_name']?></td>
+            <td><a href="#">4 заказа</a></td>
+            <td>10,81</td>
+            <td><a href="/orders/actionSetUser?id=<?=$_GET['id']?>&master_id=<?=$data['id']?>" class="btn btn-default">Выбрать</a></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    </div>
+</div>

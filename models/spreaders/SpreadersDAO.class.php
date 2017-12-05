@@ -3,8 +3,7 @@
 class SpreadersDAO
 {
     public $id;
-    public $firstName;
-    public $secondName;
+    public $name;
     public $homeAdress;
     public $phone;
     public $area;
@@ -22,8 +21,7 @@ class SpreadersDAO
     public function parseForm($form)
     {
         $this->id = $form['id'];
-        $this->firstName = $form['first_name'];
-        $this->secondName = $form['second_name'];
+        $this->name = $form['name'];
         $this->homeAdress = $form['home_adress'];
         $this->phone = $form['phone'];
         $this->area = $form['area'];
