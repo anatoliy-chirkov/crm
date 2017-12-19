@@ -14,7 +14,8 @@
             'models/spreaders/',
             'models/files/',
             'controllers/',
-            'controllers/auth/'
+            'controllers/auth/',
+            'api/'
             );
         $namespace = '';
 

@@ -4,19 +4,17 @@ class NewsController
 {
     public function index()
     {
-        $path = 'views/items/news/admin/index.html';
-        include('views/template/main.tpl.html');
+        Renderer::me()->setPath('news/index.html')->render();
     }
 
     public function add()
     {
-        $path = 'views/items/news/admin/add.html';
-        include('views/template/main.tpl.html');
+        Renderer::me()->setPath('news/add.html')->render();
     }
 
     public function actionAdd()
     {
-        $path = 'views/items/news/admin/index.html';
-        include('views/template/main.tpl.html');
+        //to do
+        Renderer::me()->setPath('news/index.html')->render();
     }
 }

@@ -18,8 +18,21 @@
             $action = $params[0];
         }
 
-        $controller = new $controller;
-        $controller->$action();
+        if ($routes[1] == 'api') {
+            $controller = ucfirst($routes[2])."Controller";
+            $controller = "Api".$controller;
+
+            if (!empty($routes[3])) {
+                $action = $routes[3];
+            }
+        }
+
+        if (isset($controller) && isset($action)) {
+            $controller = new $controller;
+            $controller->$action();
+        } else {
+            echo "Страница не найдена";
+        }
 
     } catch (Exception $e) {
 

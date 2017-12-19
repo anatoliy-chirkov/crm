@@ -7,14 +7,12 @@ class UsersController
         $data = new UserBox;
         $data = $data->getUserList();
 
-        $path = 'views/items/users/admin/all.html';
-        include('views/template/main.tpl.html');
+        Renderer::me()->setUsers($data)->setPath('users/all.html')->render();
     }
 
     public function add()
     {
-        $path = 'views/items/users/admin/add.html';
-        include('views/template/main.tpl.html');
+        Renderer::me()->setPath('users/add.html')->render();
     }
 
     public function profile()
@@ -22,8 +20,7 @@ class UsersController
         $data = new UserBox;
         $data = $data->getProfile();
 
-        $path = 'views/items/users/admin/profile.html';
-        include('views/template/main.tpl.html');
+        Renderer::me()->setUsers($data)->setPath('users/profile.html')->render();
     }
 
     public function actionAdd()
@@ -31,11 +28,5 @@ class UsersController
         if ((new Auth)->signUp($_POST)) {
             header("Location: /users/index");
         }
-    }
-
-    public function spreaders()
-    {
-        $path = 'views/items/users/hr/spreaders.html';
-        include('views/template/main.tpl.html');
     }
 }

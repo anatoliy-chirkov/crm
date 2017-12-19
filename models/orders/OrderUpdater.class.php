@@ -52,6 +52,39 @@ class OrderUpdater
         return false;
     }
 
+    /**
+     * @param $form
+     */
+    public function setReport($form)
+    {
+        $data = OrderDAO::me()->parseForm($form);
+
+        switch ($form['report_type']) {
+
+            case 1:
+
+                $sql = "UPDATE orders SET status_id = '$data->statusId', report = '$data->report' WHERE id = '$data->id'";
+                $res = DB::me()->getConnection()->prepare($sql);
+                $res->execute();
+                return;
+
+            case 2:
+
+                $sql = "UPDATE orders SET status_id = '$data->statusId', report = '$data->report' WHERE id = '$data->id'";
+                $res = DB::me()->getConnection()->prepare($sql);
+                $res->execute();
+                return;
+
+            case 3:
+
+                $sql = "UPDATE orders SET status_id = '$data->statusId', report = '$data->report' WHERE id = '$data->id'";
+                $res = DB::me()->getConnection()->prepare($sql);
+                $res->execute();
+                return;
+
+        }
+    }
+
     public function deleteOrder($form)
     {
         $data = OrderDAO::me()->parseForm($form);

@@ -4,8 +4,6 @@ class AuthController
 {
     public function index()
     {
-        session_start();
-
         $auth = new Auth;
 
         if ($_POST['auth']) {
@@ -33,21 +31,15 @@ class AuthController
 
         if ($checker->isMaster()) {
 
-            $menu = 'views/menu/master/points.html';
-            $path = 'views/items/orders/master/index.html';
-            include('views/template/main.tpl.html');
+            (new OrdersController)->index();
 
         } else if ($checker->isOperator()) {
 
-            $menu = 'views/menu/operator/points.html';
-            $path = 'views/items/orders/operator/index.html';
-            include('views/template/main.tpl.html');
+            (new OrdersController)->index();
 
         } else if ($checker->isHr()) {
 
-            $menu = 'views/menu/hr/points.html';
-            $path = 'views/items/users/hr/index.html';
-            include('views/template/main.tpl.html');
+            (new SpreadersController)->index();
 
         } else if ($checker->isAdmin()) {
 
@@ -55,8 +47,7 @@ class AuthController
 
         } else {
 
-            $path = 'views/items/auth/index.html';
-            include('views/template/auth.tpl.html');
+            Renderer::me()->render();
 
         }
     }

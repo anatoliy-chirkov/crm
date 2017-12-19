@@ -23,15 +23,15 @@
             <th>Рейтинг</th>
             <th>Профиль</th>
         </tr>
-        <?php foreach ($data as $data): ?>
+        <?php foreach ($users as $users): ?>
             <tr>
-                <td><?=$data['first_name']?></td>
-                <td><?=$data['second_name']?></td>
-                <td><?=$data['role']?></td>
-                <td><?=$data['phone']?></td>
+                <td><?=$users['first_name']?></td>
+                <td><?=$users['second_name']?></td>
+                <td><?=$users['role']?></td>
+                <td><?=$users['phone']?></td>
                 <td><a href="#">4 заказа</a></td>
                 <td>10,81</td>
-                <td><a href="/users/profile?id=<?=$data['id']?>" class="btn btn-default">Просмотр</a></td>
+                <td><a href="/users/profile?id=<?=$users['id']?>" class="btn btn-default">Просмотр</a></td>
             </tr>
         <?php endforeach; ?>
     </table>

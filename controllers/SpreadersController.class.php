@@ -7,14 +7,12 @@ class SpreadersController
         $data = new SpreadersBox;
         $data = $data->getSpreadersList();
 
-        $path = 'views/items/spreaders/all.html';
-        include('views/template/main.tpl.html');
+        Renderer::me()->setSpreaders($data)->setPath('spreaders/all.html')->render();
     }
 
     public function add()
     {
-        $path = 'views/items/spreaders/add.html';
-        include('views/template/main.tpl.html');
+        Renderer::me()->setPath('spreaders/add.html')->render();
     }
 
     public function update()
@@ -22,8 +20,15 @@ class SpreadersController
         $data = new SpreadersBox;
         $data = $data->getSpreader($_GET);
 
-        $path = 'views/items/spreaders/update.html';
-        include('views/template/main.tpl.html');
+        Renderer::me()->setSpreaders($data)->setPath('spreaders/update.html')->render();
+    }
+
+    public function calls()
+    {
+        //$data = new SpreadersBox;
+        //$data = $data->getCallsBySpreader($_GET);
+
+        Renderer::me()->setCalls($data)->setPath('spreaders/calls.html')->render();
     }
 
     public function files()
@@ -40,8 +45,7 @@ class SpreadersController
 
         $data['id'] = $_GET['id'];
 
-        $path = 'views/items/spreaders/files.html';
-        include('views/template/main.tpl.html');
+        Renderer::me()->setSpreaders($data)->setPath('spreaders/files.html')->render();
     }
 
     public function actionAdd()
@@ -81,11 +85,5 @@ class SpreadersController
         if ($file->addSpreaderFile($fileData)) {
             header("Location: /spreaders/files?id=$id");
         }
-    }
-
-    public function spreaders()
-    {
-        $path = 'views/items/users/hr/spreaders.html';
-        include('views/template/main.tpl.html');
     }
 }

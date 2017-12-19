@@ -73,7 +73,7 @@ class Renderer
         } else if ($checker->isAdmin()) {
             $user = 'admin';
         } else {
-            $this->path = 'views/general/common/auth/index.html';
+            $this->path = null;
             return $this;
         }
 
@@ -83,6 +83,12 @@ class Renderer
 
     public function render()
     {
+        if ($this->path == null) {
+            $path = 'views/general/common/auth/index.html';
+            include('views/template/auth.tpl.html');
+            return;
+        }
+
         $orders = $this->orders;
         $users = $this->users;
         $calls = $this->calls;
@@ -94,6 +100,7 @@ class Renderer
         $menu = $this->getMenu();
         $path = $this->path;
         include('views/template/main.tpl.html');
+        return;
     }
 
     /*
