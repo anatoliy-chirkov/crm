@@ -27,6 +27,37 @@ class SpreadersBox
         return $row;
     }
 
+    public function getCallsBySpreader($form)
+    {
+        $id = $form['id'];
+
+        $sql = "select * from spreaders_calls where spreader_id = '$id' order by id desc";
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+        $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
+        setlocale(LC_ALL, 'ru_RU.UTF-8');
+
+        foreach ($rows as &$row) {
+
+            $row['first_call_time'] = $row['first_call_time'] + 10800;
+            $row['date'] = date('j M y', $row['first_call_time']);
+
+            if ($row['second_call_time']) {
+
+                $row['second_call_time'] = $row['second_call_time'] + 10800;
+                $period = $row['second_call_time'] - $row['first_call_time'];
+
+                $row['period'] = date('G \ч i \м\и\н', $period);
+                $row['second_call_time'] = date('G:i', $row['second_call_time']);
+            }
+
+            $row['first_call_time'] = date('G:i', $row['first_call_time']);
+        }
+
+        return $rows;
+    }
+
     public function addIt($form)
     {
         $data = SpreadersDAO::me()->parseForm($form);

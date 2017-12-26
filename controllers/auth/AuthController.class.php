@@ -35,7 +35,7 @@ class AuthController
 
         } else if ($checker->isOperator()) {
 
-            (new OrdersController)->index();
+            (new CallsController)->index();
 
         } else if ($checker->isHr()) {
 

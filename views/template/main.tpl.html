@@ -29,12 +29,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li <?php if ($routes[1] == 'orders' || $routes[1] == null) echo 'class="active"'; ?>><a href="/orders/index">Заявки <span class="sr-only">(current)</span></a></li>
-                <li <?php if ($routes[1] == 'users') echo 'class="active"'; ?>><a href="/users/index">Пользователи </a></li>
-                <li <?php if ($routes[1] == 'calls') echo 'class="active"'; ?>><a href="/calls/index">Звонки </a></li>
-                <li <?php if ($routes[1] == 'shedule') echo 'class="active"'; ?>><a href="/shedule/index">График </a></li>
-                <li <?php if ($routes[1] == 'news') echo 'class="active"'; ?>><a href="/news/index">Новости </a></li>
-                <li <?php if ($routes[1] == 'spreaders') echo 'class="active"'; ?>><a href="/spreaders/index">Расклейщики </a></li>
+                <?php include($menu); ?>
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="form-group">

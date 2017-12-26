@@ -4,6 +4,9 @@ class CallsController
 {
     public function index()
     {
-        Renderer::me()->setPath('calls/all.html')->render();
+        $data = new Calls;
+        $data = $data->getCallsList();
+
+        Renderer::me()->setCalls($data)->setPath('calls/all.html')->render();
     }
 }

@@ -6,85 +6,73 @@ class ApiEventsController
     {
         $data = $this->parsePostJsonRequest();
 
-        $sql = "select id from spreaders where phone = '$data->from->number'";
-        $dataSpreader = DB::me()->getConnection()->prepare($sql);
-        $isSpreader = $dataSpreader->execute();
+        $number = strval($data->from->number);
 
-        if ($isSpreader) {
-            //отбиваем звонок
 
-            $spreaderId = $dataSpreader->fetch(PDO::FETCH_ASSOC);
-            $spreaderId = $spreaderId['id'];
+            $sql = "select id from spreaders where phone = '$number'";
+            $resultSpreader = DB::me()->getConnection()->prepare($sql);
+            $resultSpreader->execute();
+            $dataSpreader = $resultSpreader->fetch(PDO::FETCH_ASSOC);
 
-            $sql = "select id, count from spreaders_calls where spreader_id = $spreaderId and count < 4";
-            $callData = DB::me()->getConnection()->prepare($sql);
-            $isCallInOpenStatus = $callData->execute();
+            $spreaderId = $dataSpreader['id'];
 
-            if ($isCallInOpenStatus) {
-                //update this call by id; first_call - second_call; *two iteration in one call
+            $spreaderId
+                ? $isSpreader = true
+                : $isSpreader = false;
+
+            if ($isSpreader) {
+
+                $sql = "select id, count from spreaders_calls where spreader_id = '$spreaderId' and count < 4";
+                $callData = DB::me()->getConnection()->prepare($sql);
+                $callData->execute();
                 $callData = $callData->fetch(PDO::FETCH_ASSOC);
+
                 $id = $callData['id'];
 
-                if ($callData['count'] < 3) {
-                    $sql = "update spreaders_calls set count+1 where id = '$id'";
-                    $res = DB::me()->getConnection()->prepare($sql);
-                    $res->execute();
+                $id
+                    ? $isCallInOpenStatus = true
+                    : $isCallInOpenStatus = false;
+
+                if ($isCallInOpenStatus) {
+
+                    if ($callData['count'] < 3) {
+                        $sql = "update spreaders_calls set count = count+1 where id = '$id'";
+                        $res = DB::me()->getConnection()->prepare($sql);
+                        $res->execute();
+                    } else {
+                        $sql = "update spreaders_calls set count = count+1, second_call_time='$data->timestamp' where id = '$id'";
+                        $res = DB::me()->getConnection()->prepare($sql);
+                        $res->execute();
+                    }
+
                 } else {
-                    $sql = "update spreaders_calls set count+1, second_call_time='$data->timestamp' where id = '$id'";
+
+                    $sql = "insert into spreaders_calls (spreader_id, first_call_time, count) values ('$spreaderId', '$data->timestamp', 1)";
+
                     $res = DB::me()->getConnection()->prepare($sql);
                     $res->execute();
                 }
+            }
 
+        if (strval($data->to->number) == '74994509495') {
+
+            $sql = "select id from calls where call_id = '$data->call_id'";
+            $callData = DB::me()->getConnection()->prepare($sql);
+            $callData->execute();
+            $callData = $callData->fetch(PDO::FETCH_ASSOC);
+
+            $id = $callData['id'];
+
+            if ($id) {
+                $sql = "update calls set end_time = '$data->timestamp' where id = '$id'";
+                $res = DB::me()->getConnection()->prepare($sql);
+                $res->execute();
             } else {
-                //create call; set first_call_time;
-                $sql = "insert into spreaders_calls (spreader_id, first_call_time, count) values ('$spreaderId', '$data->timestamp', 1)";
-
+                $sql = "insert into calls (number, init_time, call_id) values ('$number', '$data->timestamp', '$data->call_id')";
                 $res = DB::me()->getConnection()->prepare($sql);
                 $res->execute();
             }
-
-            return;
         }
-
-        $sql = "select master_id from orders where phone = '$data->from->number'";
-        $infoAboutClient = DB::me()->getConnection()->prepare($sql);
-        $isClientWithMaster = $infoAboutClient->execute();
-
-        if ($isClientWithMaster) {
-            $masterId = $infoAboutClient->fetch(PDO::FETCH_ASSOC);
-            $masterId = $masterId['id'];
-
-            $sql = "select phone from users where id = '$masterId'";
-            $toPhone = DB::me()->getConnection()->prepare($sql)->fetch();
-            $toPhone = $toPhone['phone'];
-
-            $response = '';
-
-            print_r($response);
-
-        } else {
-            //call to main phone
-        }
-
-        return;
-
-        /*$api = new ApiController;
-
-        $data = array();
-
-        $sign = $api->sign($data);
-        $json = json_encode($data);
-
-        $api_key = 'ntwc8o86aekb8dja2phoc1d1hpj215nf';
-
-        $postdata = array(
-            'vpbx_api_key' => $api_key,
-            'sign' => $sign,
-            'json' => $json
-        );
-
-        $response = $postdata;
-        print_r($response); */
     }
 
     public function summary()
@@ -110,7 +98,8 @@ class ApiEventsController
 
     private function parsePostJsonRequest()
     {
-        $data = strstr($_POST,'{');
+        $str = implode($_POST);
+        $data = strstr($str,'{');
 
         return json_decode($data);
     }

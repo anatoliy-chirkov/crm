@@ -8,12 +8,12 @@
     <br><br>
     <div class="col-sm-8 row">
     <table class="table">
-        <?php foreach ($data as $data): ?>
+        <?php foreach ($users as $users): ?>
         <tr>
-            <td><?=$data['first_name']?> <?=$data['second_name']?></td>
+            <td><?=$users['first_name']?> <?=$users['second_name']?></td>
             <td><a href="#">4 заказа</a></td>
             <td>10,81</td>
-            <td><a href="/orders/actionSetUser?id=<?=$_GET['id']?>&master_id=<?=$data['id']?>" class="btn btn-default">Выбрать</a></td>
+            <td><a href="/orders/actionSetUser?id=<?=$_GET['id']?>&master_id=<?=$users['id']?>" class="btn btn-default">Выбрать</a></td>
         </tr>
         <?php endforeach; ?>
     </table>

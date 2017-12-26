@@ -1,0 +1,40 @@
+<?php
+
+class Calls
+{
+    public $id;
+    public $number;
+    public $orderId;
+    public $initTime;
+    public $endTime;
+    public $comment;
+    public $record;
+    public $userId;
+    public $callId;
+
+    public function getCallsList()
+    {
+        $sql = "select * from calls order by id desc";
+
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+        $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($rows as &$row) {
+
+            $row['init_time'] = $row['init_time'] + 10800;
+            $row['date'] = date('j M ', $row['init_time']) . date('G:i', $row['init_time']);
+
+            if ($row['end_time']) {
+
+                $row['end_time'] = $row['end_time'] + 10800;
+                $period = $row['end_time'] - $row['init_time'];
+
+                $row['duration'] = date('G \ч i \м s \с', $period);
+                $row['end_time'] = date('G:i', $row['end_time']);
+            }
+        }
+
+        return $rows;
+    }
+}

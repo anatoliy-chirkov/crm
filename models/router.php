@@ -27,6 +27,11 @@
             }
         }
 
+        if ($routes[1] == 'api' && $routes[2] == null) {
+            $controller = 'ApiCallbackController';
+            $action = 'index';
+        }
+
         if (isset($controller) && isset($action)) {
             $controller = new $controller;
             $controller->$action();

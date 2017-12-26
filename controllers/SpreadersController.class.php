@@ -25,10 +25,11 @@ class SpreadersController
 
     public function calls()
     {
-        //$data = new SpreadersBox;
-        //$data = $data->getCallsBySpreader($_GET);
+        $data = new SpreadersBox;
+        $calls = $data->getCallsBySpreader($_GET);
+        $spreader = $data->getSpreader($_GET);
 
-        Renderer::me()->setCalls($data)->setPath('spreaders/calls.html')->render();
+        Renderer::me()->setCalls($calls)->setSpreaders($spreader)->setPath('spreaders/calls.html')->render();
     }
 
     public function files()
