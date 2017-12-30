@@ -1,11 +1,22 @@
 .auth {
     margin-top: 5%;
 }
+.auth_body {
+    background-color: #ededed;
+}
 .buttons-case {
     margin-bottom: 20px;
 }
 h2 {
     margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.menu_for_site li {
+    line-height: 3em;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
 }
 
 table .checkbox {

@@ -5,12 +5,14 @@
             <th>Дата и время</th>
             <th>Телефон</th>
             <th>Продолжительность</th>
+            <th>Номер заказа</th>
         </tr>
         <?php foreach ($calls as $call): ?>
         <tr>
             <td><?=$call['date']?></td>
             <td><?=$call['number']?></td>
             <td><?=$call['duration']?></a></td>
+            <td><?=$call['order_id']?></a></td>
         </tr>
         <?php endforeach; ?>
     </table>

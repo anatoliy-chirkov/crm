@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -31,29 +31,30 @@
             <ul class="nav navbar-nav">
                 <?php include($menu); ?>
             </ul>
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Профиль <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Настройки <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Моя информация</a></li>
-                        <li><a href="#">Статистика</a></li>
+                        <li><a href="#">Моя профиль</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="/auth/logout">Выйти</a></li>
+                        <li><a href="#">Статистика</a></li>
                     </ul>
                 </li>
+                <li><a href="/auth/logout">Выйти</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
 <div class="container">
 
-<?php include($path); ?>
+    <div class="col-sm-2">
+        <ul class="menu_for_site row list-unstyled">
+            <?php include($menu); ?>
+        </ul>
+    </div>
+    <div class="col-sm-10">
+        <?php include($path); ?>
+    </div>
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
