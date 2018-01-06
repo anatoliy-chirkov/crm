@@ -61,6 +61,12 @@ class ApiEventsController
             $callData->execute();
             $callData = $callData->fetch(PDO::FETCH_ASSOC);
 
+            $sql = "select id from orders where phone = '$number'";
+            $orderData = DB::me()->getConnection()->prepare($sql);
+            $orderData->execute();
+            $orderData = $orderData->fetch(PDO::FETCH_ASSOC);
+            $orderId = $orderData['id'];
+
             $id = $callData['id'];
 
             if ($id) {
@@ -68,7 +74,7 @@ class ApiEventsController
                 $res = DB::me()->getConnection()->prepare($sql);
                 $res->execute();
             } else {
-                $sql = "insert into calls (number, init_time, call_id) values ('$number', '$data->timestamp', '$data->call_id')";
+                $sql = "insert into calls (number, init_time, call_id, order_id) values ('$number', '$data->timestamp', '$data->call_id', '$orderId')";
                 $res = DB::me()->getConnection()->prepare($sql);
                 $res->execute();
             }

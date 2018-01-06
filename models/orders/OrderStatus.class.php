@@ -31,9 +31,7 @@ class OrderStatus
                 '<a href="/orders/card?id='.$orderId.'&page=report" class="btn btn-primary btn-sm">Отчет</a>';
         } else if ($statusId == 2) {
             return
-                '<a href="/orders/card?id='.$orderId.'&page=report" class="btn btn-primary btn-sm">Заказ выполнен</a>'.
-                '<br>'.
-                '<a href="/orders/card?id='.$orderId.'&page=report" class="btn btn-primary btn-sm">Отчет</a>';
+                '<a href="/orders/card?id='.$orderId.'&page=report" class="btn btn-primary btn-sm">Заказ выполнен</a>';
         } else if ($statusId == 6 ||  $statusId == 8) {
             return
                 '<a href="/orderStatusSetter/setStatus?id=0&order_id='.$orderId.'" class="btn btn-primary btn-sm">Принять в работу</a>'.

@@ -4,7 +4,7 @@ class OrdersController
 {
     public function index()
     {
-        $data = (new OrderBox)->getOrdersList();
+        $data = (new Orders)->getOrdersList();
 
         Renderer::me()->setOrders($data)->setPath('orders/all.html')->render();
     }
@@ -16,7 +16,7 @@ class OrdersController
 
     public function edit()
     {
-        $data = new OrderBox;
+        $data = new Orders;
         $data = $data->getOrderCard();
 
         Renderer::me()->setOrders($data)->setPath('orders/edit.html')->render();
@@ -24,26 +24,17 @@ class OrdersController
 
     public function card()
     {
-        $data = new OrderBox;
+        $data = new Orders;
         $data = $data->getOrderCard();
 
         Renderer::me()->setOrders($data)->setPath('orders/card.html')->render();
     }
 
-    public function report1()
+    public function actionEdit()
     {
-        $data = new OrderBox;
-        $data = $data->getOrderCard();
-
-        Renderer::me()->setOrders($data)->setPath('orders/report1.html')->render();
-    }
-
-    public function report2()
-    {
-        $data = new OrderBox;
-        $data = $data->getOrderCard();
-
-        Renderer::me()->setOrders($data)->setPath('orders/report2.html')->render();
+        if ((new OrderUpdater)->editOrder($_POST)) {
+            header("Location: /orders/index");
+        }
     }
 
     public function actionAdd()
@@ -96,27 +87,6 @@ class OrdersController
     {
         if ((new OrderUpdater)->deleteOrder($_POST)) {
             header("Location: /orders/index");
-        }
-    }
-
-    /**
-     * @param id, user_id, report_type $_GET
-     */
-    public function report()
-    {
-        $data = new UserDAO;
-        $data = $data->parseForm($_GET);
-
-        switch ($_GET['report_type']) {
-            case 1:
-                Renderer::me()->setOrders($data)->setPath('orders/reports/1.html')->render();
-                break;
-            case 2:
-                Renderer::me()->setOrders($data)->setPath('orders/reports/2.html')->render();
-                break;
-            case 3:
-                Renderer::me()->setOrders($data)->setPath('orders/reports/3.html')->render();
-                break;
         }
     }
 

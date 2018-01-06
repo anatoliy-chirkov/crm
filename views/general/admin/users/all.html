@@ -1,25 +1,23 @@
 <div class="users-admin-all">
     <h2>Пользователи</h2>
     <div class="buttons-case col-sm-12 row">
+        <div class="col-sm-12 row">
+            <a href="/users/add" class="btn btn-primary">Добавить пользователя</a>
+        </div>
+        <br><br>
         <div class="sort_block col-sm-12">
-            <div class="users-all-sort col-sm-12 row"><strong>Сортировка</strong></div>
+            <br>
             <form action="/orders/index" role="form" method="POST">
-                <div class="form-group col-sm-4 row">
+                <div class="form-group col-sm-3 row">
                     <select name="for_roles" class="form-control" id="input3">
-                        <option value="1">Мастера</option>
-                        <option value="2">Мастера по рейтингу</option>
+                        <option value="1">Тип пользователя</option>
+                        <option value="2">Мастера</option>
                         <option value="3">Администраторы</option>
                         <option value="4">HR</option>
                         <option value="4">Операторы</option>
                     </select>
                 </div>
-                <div class="col-sm-2">
-                    <button type="submit" class="btn btn-default">Применить</button>
-                </div>
             </form>
-        </div>
-        <div class="col-sm-12 row">
-            <a href="/users/add" class="btn btn-primary">Добавить пользователя</a>
         </div>
     </div>
     <table class="table table-striped">

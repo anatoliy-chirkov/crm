@@ -1,0 +1,63 @@
+<div class="orders-admin-all">
+    <h2>Редактирование заявки №<?=$orders['id']?></h2>
+    <div class="buttons-case">
+        <a href="/orders/card?id=<?=$orders['id']?>" type="button" class="btn btn-default">Отмена</a>
+    </div>
+    <form class="col-md-6 row" action="/orders/actionEdit" role="form" method="POST">
+
+        <div class="form-group">
+            <label for="input3" class=" control-label">Статус</label>
+            <input name="status_id" type="text" class="form-control" id="input3" value="<?=$orders['status_id']?>">
+        </div>
+
+        <div class="form-group">
+            <label for="input7" class=" control-label">Мастер</label>
+            <select name="master_id" type="text" class="form-control" id="input7">
+                <?php foreach($masters as $master): ?>
+                <option value="<?=$master['id']?>"><?=$master['first_name'].' '.$master['second_name']?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="input1" class="control-label">ФИО клиента</label>
+            <input name="name" type="text" class="form-control" id="input1" value="<?=$orders['name']?>">
+        </div>
+        <div class="form-group">
+            <label for="input2" class=" control-label">Телефон</label>
+            <input name="phone" type="text" class="form-control" id="input2" value="<?=$orders['phone']?>">
+        </div>
+        <div class="form-group">
+            <label for="input5" class=" control-label">Метро</label>
+            <input name="metro" type="text" class="form-control" id="input5" value="<?=$orders['metro']?>">
+        </div>
+        <div class="form-group">
+            <label for="input5" class=" control-label">Район</label>
+            <input name="area" type="text" class="form-control" id="input5" value="<?=$orders['area']?>">
+        </div>
+        <div class="form-group">
+            <label for="input6" class=" control-label">Адрес</label>
+            <input name="adress" type="text" class="form-control" id="input6" value="<?=$orders['adress']?>">
+        </div>
+
+        <div class="form-group">
+            <label for="input6" class=" control-label">Дата прибытия</label>
+            <input name="arrival_day" type="text" class="form-control" id="input6" value="<?=$orders['arrival_day']?>">
+        </div>
+        <div class="form-group">
+            <label for="input6" class=" control-label">Время прибытия</label>
+            <input name="arrival_time" type="text" class="form-control" id="input6" value="<?=$orders['arrival_time']?>">
+        </div>
+
+        <div class="form-group">
+            <label for="input3" class=" control-label">Описание проблемы</label>
+            <input name="problem" type="text" class="form-control" id="input3" value="<?=$orders['problem']?>">
+        </div>
+
+        <input name="id" type="hidden" value="<?=$orders['id']?>">
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+        </div>
+    </form>
+</div>

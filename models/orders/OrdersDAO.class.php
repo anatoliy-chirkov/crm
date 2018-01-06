@@ -1,6 +1,6 @@
 <?php
 
-class OrderDAO
+class OrdersDAO
 {
     public $id;
     public $name;

@@ -1,6 +1,6 @@
 <?php
 
-class OrderBox
+class Orders
 {
     public function getOrdersList()
     {
@@ -14,7 +14,7 @@ class OrderBox
 
             $rows[$i]['action'] = $this->getActionList($rows[$i]);
 
-            $rows[$i]['status_id'] = Enum::GRAPHIC_ORDER_STATUS[$rows[$i]['status_id']];
+            $rows[$i]['status'] = Enum::GRAPHIC_ORDER_STATUS[$rows[$i]['status_id']];
 
             if ($rows[$i]['master_id'] != 0) {
                 $user = (new UserBox)->getProfile($rows[$i]['master_id']);
@@ -50,7 +50,7 @@ class OrderBox
             $row['report_view'] = 'views/general/admin/orders/reports/standart.html';
         }
 
-        $row['status_id'] = Enum::GRAPHIC_ORDER_STATUS[$row['status_id']];
+        $row['status'] = Enum::GRAPHIC_ORDER_STATUS[$row['status_id']];
         $row['page'] = $_GET['page'];
 
         return $row;
