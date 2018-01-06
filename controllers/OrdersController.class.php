@@ -6,28 +6,36 @@ class OrdersController
     {
         $data = (new Orders)->getOrdersList();
 
-        Renderer::me()->setOrders($data)->setPath('orders/all.html')->render();
+        Renderer::me()->setOrders($data)->setCountOfElements($data)->setPath('orders/all.html')->render();
     }
 
     public function add()
     {
-        Renderer::me()->setPath('orders/add.html')->render();
+        $data = new UserBox;
+        $masters = $data->getMasterList();
+
+        Renderer::me()->setUsers($masters)->setPath('orders/add.html')->render();
     }
 
     public function edit()
     {
-        $data = new Orders;
-        $data = $data->getOrderCard();
+        $orderData = new Orders;
+        $order = $orderData->getOrderCard();
 
-        Renderer::me()->setOrders($data)->setPath('orders/edit.html')->render();
+        $userData = new UserBox;
+        $masters = $userData->getMasterList();
+
+        $statuses = Enum::GRAPHIC_ORDER_STATUS;
+
+        Renderer::me()->setOrders($order)->setStatuses($statuses)->setUsers($masters)->setPath('orders/edit.html')->render();
     }
 
     public function card()
     {
-        $data = new Orders;
-        $data = $data->getOrderCard();
+        $orderData = new Orders;
+        $order = $orderData->getOrderCard();
 
-        Renderer::me()->setOrders($data)->setPath('orders/card.html')->render();
+        Renderer::me()->setOrders($order)->setPath('orders/card.html')->render();
     }
 
     public function actionEdit()

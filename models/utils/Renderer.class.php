@@ -9,6 +9,7 @@ class Renderer
     public $news;
     public $spreaders;
     public $statuses;
+    public $count;
 
     protected $path;
 
@@ -59,6 +60,13 @@ class Renderer
         return $this;
     }
 
+    public function setCountOfElements($data)
+    {
+        $this->count = count($data);
+
+        return $this;
+    }
+
     public function getPath($data)
     {
         return $this->setPath($data)->path;
@@ -100,6 +108,7 @@ class Renderer
         $news = $this->news;
         $spreaders = $this->spreaders;
         $statuses = $this->statuses;
+        $count = $this->count;
 
         $menu = $this->getMenu();
         $path = $this->path;

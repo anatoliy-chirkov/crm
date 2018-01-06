@@ -2,7 +2,7 @@
     <h2><?=$data['role']?> <?=$data['first_name']?> <?=$data['second_name']?></h2>
     <div class="buttons-case">
         <a href="/users/index" type="button" class="btn btn-default">Назад</a>
-        <a href="/users/edit?id=<?=$users['id']?>" type="button" class="btn btn-warning">Редактировать</a>
+        <a href="/users/edit?id=<?=$users['id']?>" type="button" class="btn btn-primary">Редактировать</a>
         <?php if($users['role_id'] != 5): ?>
         <a href="/users/actionDelete?id=<?=$users['id']?>" type="button" class="btn btn-danger">Удалить пользователя</a>
         <?php endif; ?>

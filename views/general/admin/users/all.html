@@ -1,10 +1,6 @@
 <div class="users-admin-all">
-    <h2>Пользователи</h2>
+    <h2>Пользователи <a href="/users/add" class="btn btn-primary">Создать пользователя</a></h2>
     <div class="buttons-case col-sm-12 row">
-        <div class="col-sm-12 row">
-            <a href="/users/add" class="btn btn-primary">Добавить пользователя</a>
-        </div>
-        <br><br>
         <div class="sort_block col-sm-12">
             <br>
             <form action="/orders/index" role="form" method="POST">
@@ -34,7 +30,7 @@
                 <td><?=$users['login']?></td>
                 <td><?=$users['first_name'].' '.$users['second_name']?></td>
                 <td><?=$users['phone']?></td>
-                <td><a href="/users/profile?id=<?=$users['id']?>" class="btn btn-default">Просмотр</a></td>
+                <td><a href="/users/profile?id=<?=$users['id']?>" class="btn btn-default">Открыть</a></td>
             </tr>
         <?php endforeach; ?>
     </table>

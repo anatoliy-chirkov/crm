@@ -27,11 +27,11 @@
 
         <div class="form-group">
             <label for="input6" class=" control-label">Дата прибытия</label>
-            <input name="arrival_day" type="text" class="form-control" id="input6">
+            <input name="arrival_day" type="date" class="form-control" id="input6">
         </div>
         <div class="form-group">
             <label for="input6" class=" control-label">Время прибытия</label>
-            <input name="arrival_time" type="text" class="form-control" id="input6">
+            <input name="arrival_time" type="time" class="form-control" id="input6">
         </div>
 
         <div class="form-group">
@@ -41,12 +41,14 @@
 
         <div class="form-group">
             <label for="input7" class=" control-label">Мастер</label>
-            <select name="master_id" type="text" class="form-control" id="input7">
-                <?php foreach($masters as $master): ?>
-                <option value="<?=$master['id']?>"><?=$master['first_name'].' '.$master['second_name']?></option>
+            <select name="master_id" class="form-control" id="input7">
+                <option value="null">Не выбран</option>
+                <?php foreach($users as $user): ?>
+                <option value="<?=$user['id']?>"><?=$user['first_name'].' '.$user['second_name'].' ('.$user['login'].')'?></option>
                 <?php endforeach; ?>
             </select>
         </div>
+
         <input name="operator_id" type="hidden" value="1">
 
         <div class="form-group">

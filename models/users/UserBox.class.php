@@ -18,6 +18,17 @@ class UserBox
         return $rows;
     }
 
+    public function getMasterList()
+    {
+        $sql = "select * from users where role = 1";
+
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+        $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
+        return $rows;
+    }
+
     public function getProfile($id = null)
     {
         if (empty($id)) {

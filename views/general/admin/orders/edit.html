@@ -7,14 +7,19 @@
 
         <div class="form-group">
             <label for="input3" class=" control-label">Статус</label>
-            <input name="status_id" type="text" class="form-control" id="input3" value="<?=$orders['status_id']?>">
+            <select name="status_id" class="form-control" id="input3">
+                <?php foreach($statuses as $key => $value): ?>
+                <option <?php if($key == $orders['status_id']) {echo 'selected';}?> value="<?=$key?>"><?=$value?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
 
         <div class="form-group">
             <label for="input7" class=" control-label">Мастер</label>
-            <select name="master_id" type="text" class="form-control" id="input7">
-                <?php foreach($masters as $master): ?>
-                <option value="<?=$master['id']?>"><?=$master['first_name'].' '.$master['second_name']?></option>
+            <select name="master_id" class="form-control" id="input7">
+                <option value="null">Не выбран</option>
+                <?php foreach($users as $user): ?>
+                <option <?php if($orders['master_id'] == $user['id']) {echo 'selected';}?> value="<?=$user['id']?>"><?=$user['first_name'].' '.$user['second_name'].' ('.$user['login'].')'?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -42,11 +47,11 @@
 
         <div class="form-group">
             <label for="input6" class=" control-label">Дата прибытия</label>
-            <input name="arrival_day" type="text" class="form-control" id="input6" value="<?=$orders['arrival_day']?>">
+            <input name="arrival_day" type="date" class="form-control" id="input6" value="<?=$orders['arrival_day']?>">
         </div>
         <div class="form-group">
             <label for="input6" class=" control-label">Время прибытия</label>
-            <input name="arrival_time" type="text" class="form-control" id="input6" value="<?=$orders['arrival_time']?>">
+            <input name="arrival_time" type="time" class="form-control" id="input6" value="<?=$orders['arrival_time']?>">
         </div>
 
         <div class="form-group">
