@@ -2,21 +2,13 @@
 
 class Enum
 {
-    const ROLES = array(
+    const
+
+        ROLES = array(
         1 => 'Мастер',
         2 => 'Оператор',
         3 => 'HR',
         4 => 'Администратор'
-    ),
-
-
-        ORDER_STATUS = array(
-            0 => '<span class="label label-default">Не распределен</span>',
-            1 => '<span class="label label-danger">Прозвон</span>',
-            2 => '<span class="label label-primary">Подтвержден</span>',
-            3 => '<span class="label label-primary">В работе</span>',
-            4 => '<span class="label label-info">Прибыл на заказ</span>',
-            5 => '<span class="label label-success">Заказ выполнен</span>'
     ),
 
         MASTER_ORDER_STATUS = array(
@@ -28,19 +20,23 @@ class Enum
         5 => 'отказ',
         6 => 'перенос',
         7 => 'ремонт',
-        8 => 'повтор',
-        9 => 'ремонт',
+        8 => 'повтор'
     ),
 
-        /*
-         * Ожидает оплаты
-         *
-         *
-         */
+        GRAPHIC_ORDER_STATUS = array(
+        0 => '<span class="label label-primary">В работе</span>',
+        1 => '<span class="label label-info">Вызов потдвержден</span>',
+        2 => '<span class="label label-info">Прибыл на заказ</span>',
+        3 => '<span class="label label-success">Заказ выполнен</span>',
+        4 => '<span class="label label-danger">Прозвон</span>',
+        5 => '<span class="label label-danger">Отказ</span>',
+        6 => '<span class="label label-default">Перенос</span>',
+        7 => '<span class="label label-warning">Ремонт</span>',
+        8 => '<span class="label label-default">Повтор</span>'
+    ),
 
         ORDER_PAYMENT_STATUS = array(
-            0 => 'Не оплачен',
-            1 => 'В ожидании оплаты',
-            2 => 'Оплачен',
+        0 => 'В ожидании оплаты',
+        1 => 'Оплачен'
     );
 }

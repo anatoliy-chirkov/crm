@@ -11,7 +11,10 @@ class OrderBox
         $rows = $res->fetchAll(PDO::FETCH_ASSOC);
 
         for ($i = 0; $rows[$i]['id'] != null; $i++) {
-            $rows[$i]['status_id'] = Enum::ORDER_STATUS[$rows[$i]['status_id']];
+
+            $rows[$i]['action'] = $this->getActionList($rows[$i]);
+
+            $rows[$i]['status_id'] = Enum::GRAPHIC_ORDER_STATUS[$rows[$i]['status_id']];
 
             if ($rows[$i]['master_id'] != 0) {
                 $user = (new UserBox)->getProfile($rows[$i]['master_id']);
@@ -25,6 +28,11 @@ class OrderBox
         return $rows;
     }
 
+    public function getActionList($row)
+    {
+        return OrderStatus::me()->getActionsForStatus($row);
+    }
+
     public function getOrderCard()
     {
         $id = $_GET['id'];
@@ -34,7 +42,16 @@ class OrderBox
         $res->execute();
         $row = $res->fetch(PDO::FETCH_ASSOC);
 
-        $row['status_id'] = Enum::ORDER_STATUS[$row['status_id']];
+        if ($row['status_id'] == 2) {
+            $row['report_view'] = 'views/general/admin/orders/reports/final.html';
+        } elseif ($row['status_id'] == 4) {
+            $row['report_view'] = 'views/general/admin/orders/reports/afterCall.html';
+        } else {
+            $row['report_view'] = 'views/general/admin/orders/reports/standart.html';
+        }
+
+        $row['status_id'] = Enum::GRAPHIC_ORDER_STATUS[$row['status_id']];
+        $row['page'] = $_GET['page'];
 
         return $row;
     }

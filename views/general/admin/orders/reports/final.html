@@ -1,0 +1,14 @@
+<div class="col-sm-12 row">
+    <a href="/orderStatusSetter/setStatus?id=7&order_id=<?=$orders['id']?>" class="btn btn-warning">Ремонт</a>
+    <a href="/orderStatusSetter/setStatus?id=6&order_id=<?=$orders['id']?>" class="btn btn-default">Перенос</a>
+    <a href="/orderStatusSetter/setStatus?id=5&order_id=<?=$orders['id']?>" class="btn btn-danger">Отказ</a>
+    <a href="/orderStatusSetter/setStatus?id=3&order_id=<?=$orders['id']?>" class="btn btn-success">Заказ Выполнен</a>
+</div>
+<br><br><br>
+<form class="col-sm-4 row">
+    <div class="form-group">
+        <label>Ваш комментарий</label>
+        <textarea id="exampleInputEmail1" class="form-control" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>

@@ -2,18 +2,19 @@
     <h2>Заявка №<?=$orders['id']?></h2>
     <div class="buttons-case">
         <a href="/orders/index" type="button" class="btn btn-default">Назад</a>
+        <a href="/orders/edit?id=<?=$_GET['id']?>" type="button" class="btn btn-primary">Редактироваь</a>
     </div>
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#home" data-toggle="tab">Карточка клиента</a></li>
+    <li class="<?php if($orders['page'] == null) {echo 'active';}?>"><a href="#home" data-toggle="tab">Карточка клиента</a></li>
     <li><a href="#profile" data-toggle="tab">Карточка заказа</a></li>
-    <li><a href="#messages" data-toggle="tab">Отчет о заявке</a></li>
+    <li class="<?php if($orders['page'] == 'report') {echo 'active';}?>"><a href="#messages" data-toggle="tab">Отчет о заявке</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-    <div class="tab-pane active" id="home">
+    <div class="tab-pane <?php if($orders['page'] == null) {echo 'active';}?>" id="home">
         <table class="table table-striped">
             <tr>
                 <td>Источник</td><th><?=$orders['operator_id']?></th>
@@ -88,19 +89,9 @@
     </div>
 
 
-    <div class="tab-pane" id="messages">
+    <div class="tab-pane <?php if($orders['page'] == 'report') {echo 'active';}?>" id="messages">
         <br>
-        <div class="col-sm-12 row">
-            <button type="button" class="btn btn-success">Решено</button>
-            <button type="button" class="btn btn-info">Решаю</button>
-        </div>
-        <br><br><br>
-        <form class="col-sm-4 row">
-            <div class="form-group">
-                <textarea id="exampleInputEmail1" class="form-control" rows="3" placeholder="Результат прозвона"></textarea>
-            </div>
-            <button type="submit" class="btn btn-default">Добавить</button>
-        </form>
+        <?php include($orders['report_view']); ?>
     </div>
 </div>
 </div>

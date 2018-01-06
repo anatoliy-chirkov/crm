@@ -19,6 +19,30 @@ h2 {
     padding: 0;
 }
 
+.btn-sm {
+    margin-bottom: 5px;
+}
+
+.sort_block {
+    background-color: #ededed;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.right_button_block {
+    padding-top: 10px;
+    text-align: right;
+}
+.btn_href {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    color: #0e84b5;
+    font-size: 14px;
+}
+.btn_href:hover {
+    color: #1c4e63;
+    text-decoration: underline;
+}
 table .checkbox {
     margin: 0;
     display: inline;

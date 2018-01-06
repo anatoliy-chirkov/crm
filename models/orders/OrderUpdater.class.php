@@ -5,9 +5,36 @@ class OrderUpdater
     public function createOrder($form)
     {
         $data = OrderDAO::me()->parseForm($form);
-        $dataString = $data->toString();
 
-        $sql = "insert into orders values ($dataString)";
+        $sql = "insert into orders 
+                (
+                    name, 
+                    phone, 
+                    metro, 
+                    area, 
+                    adress, 
+                    arrival_day, 
+                    arrival_time, 
+                    problem, 
+                    master_id, 
+                    operator_id, 
+                    status_id, 
+                    order_create
+                ) values 
+                (
+                    '$data->name', 
+                    '$data->phone', 
+                    '$data->metro', 
+                    '$data->area', 
+                    '$data->adress', 
+                    '$data->arrivalDay', 
+                    '$data->arrivalTime', 
+                    '$data->problem', 
+                    '$data->masterId', 
+                    '$data->operatorId', 
+                    '$data->statusId', 
+                    '$data->orderCreate'
+                )";
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();
@@ -87,10 +114,13 @@ class OrderUpdater
 
     public function deleteOrder($form)
     {
-        $data = OrderDAO::me()->parseForm($form);
-        //$dataString = $data->toString();
+        $id = implode(", ", $form['id']);
 
-        $sql = "delete from orders where id = '$data->id'";
+        if (strripos($id, ',')) {
+            $sql = "delete from orders where id IN ($id)";
+        } else {
+            $sql = "delete from orders where id = '$id'";
+        }
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();

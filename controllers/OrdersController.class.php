@@ -14,12 +14,36 @@ class OrdersController
         Renderer::me()->setPath('orders/add.html')->render();
     }
 
+    public function edit()
+    {
+        $data = new OrderBox;
+        $data = $data->getOrderCard();
+
+        Renderer::me()->setOrders($data)->setPath('orders/edit.html')->render();
+    }
+
     public function card()
     {
         $data = new OrderBox;
         $data = $data->getOrderCard();
 
         Renderer::me()->setOrders($data)->setPath('orders/card.html')->render();
+    }
+
+    public function report1()
+    {
+        $data = new OrderBox;
+        $data = $data->getOrderCard();
+
+        Renderer::me()->setOrders($data)->setPath('orders/report1.html')->render();
+    }
+
+    public function report2()
+    {
+        $data = new OrderBox;
+        $data = $data->getOrderCard();
+
+        Renderer::me()->setOrders($data)->setPath('orders/report2.html')->render();
     }
 
     public function actionAdd()
@@ -102,51 +126,5 @@ class OrdersController
 
         (new OrderUpdater)->setReport($_POST);
         header("Location: /orders/card?id=$id");
-    }
-
-    public function getActionList()
-    {
-        /*
-         * Доступные действия
-         * ссылки одинаковые (кроме просмотра)
-         */
-
-        $id = $_GET['id'];
-        $status_id = $_GET['status_id'];
-
-        if ($status_id == 1) {
-
-            $actions =
-                '<a href="orders/report1?id=$id&status_id=1">Заказ выполнен</a>'.
-                '<br>'.
-                '<a href="orders/report1?id=$id">Отчет</a>';
-
-        } else if ($status_id == 2) {
-
-            $actions =
-                '<a href="orders/report2?id=$id&status_id=2">Прибыл на заказ</a>'.
-                '<br>'.
-                '<a href="orders/report2?id=$id">Отчет</a>';
-
-        } else if ($status_id == 3) {
-
-            $actions =
-                '<a href="orders/report3?id=$id&status_id=2">Решаю</a>'.
-                '<a href="orders/report3?id=$id&status_id=2">Перенос</a>'.
-                '<br>'.
-                '<a href="orders/report3?id=$id">Отчет</a>';
-
-        } else if ($status_id == 2) {
-
-            $actions =
-                '<a href="orders/report1?id=$id&status_id=2">Прибыл на заказ</a>'.
-                '<br>'.
-                '<a href="orders/report1?id=$id">Отчет</a>';
-
-        }
-
-        //to do (if ...)
-
-        return $actions;
     }
 }

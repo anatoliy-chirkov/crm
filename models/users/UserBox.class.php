@@ -29,6 +29,7 @@ class UserBox
         $res->execute();
         $rows = $res->fetch(PDO::FETCH_ASSOC);
 
+        $rows['role_id'] = $rows['role'];
         $rows['role'] = Enum::ROLES[$rows['role']];
 
         //в rows засетить нужные параметры

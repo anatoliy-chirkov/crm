@@ -59,6 +59,10 @@ class Renderer
         return $this;
     }
 
+    public function getPath($data)
+    {
+        return $this->setPath($data)->path;
+    }
 
     public function setPath($data)
     {

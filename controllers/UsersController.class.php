@@ -23,9 +23,31 @@ class UsersController
         Renderer::me()->setUsers($data)->setPath('users/profile.html')->render();
     }
 
+    public function edit()
+    {
+        $data = new UserBox;
+        $data = $data->getProfile();
+
+        Renderer::me()->setUsers($data)->setPath('users/edit.html')->render();
+    }
+
     public function actionAdd()
     {
         if ((new Auth)->signUp($_POST)) {
+            header("Location: /users/index");
+        }
+    }
+
+    public function actionEdit()
+    {
+        if ((new UserUpdater())->updateIt($_POST)) {
+            header("Location: /users/index");
+        }
+    }
+
+    public function actionDelete()
+    {
+        if ((new UserUpdater())->deleteIt($_GET)) {
             header("Location: /users/index");
         }
     }
