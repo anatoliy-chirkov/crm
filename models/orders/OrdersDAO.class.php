@@ -45,7 +45,7 @@ class OrdersDAO
         $this->area = $form['area'];
         $this->adress = $form['adress'];
         $this->problem = $form['problem'];
-        $this->orderCreate = time();
+        $this->orderCreate = date('j M, G:i ', time() + 10800);
         $this->masterId = $form['master_id'];
         $this->performanceStatusId = $form['performance_status_id'];
         $this->paymentStatus = $form['payment_status'];

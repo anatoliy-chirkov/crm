@@ -91,11 +91,11 @@ class OrdersController
         return false;
     }
 
-    public function actionDelete()
+    public function actionTurn()
     {
-        if ((new OrderUpdater)->deleteOrder($_POST)) {
-            header("Location: /orders/index");
-        }
+        (new OrderUpdater)->turnOrders($_POST);
+
+        header("Location: /orders/index");
     }
 
     public function actionReport()

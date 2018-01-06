@@ -106,23 +106,27 @@ class OrderUpdater
         return false;
     }
 
-    public function deleteOrder($form)
+    public function turnOrders($form)
     {
         $id = implode(", ", $form['id']);
 
-        if (strripos($id, ',')) {
-            $sql = "delete from orders where id IN ($id)";
-        } else {
-            $sql = "delete from orders where id = '$id'";
-        }
+        if ($form['action'] == 'delete') {
+            if (strripos($id, ',')) {
+                $sql = "delete from orders where id IN ($id)";
+            } else {
+                $sql = "delete from orders where id = '$id'";
+            }
 
-        $res = DB::me()->getConnection()->prepare($sql);
-        $res->execute();
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
 
-        if ($res != null) {
+            if ($res != null) {
+                return true;
+            } else {
+                return false;
+            }
+        } elseif ($form['action'] == 'close') {
             return true;
-        } else {
-            return false;
         }
     }
 

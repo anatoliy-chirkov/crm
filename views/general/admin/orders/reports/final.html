@@ -1,15 +1,28 @@
 <div class="col-sm-12 row">
-    <a href="/orderStatusSetter/setStatus?id=7&order_id=<?=$orders['id']?>" class="btn btn-warning">Ремонт</a>
-    <a href="/orderStatusSetter/setStatus?id=6&order_id=<?=$orders['id']?>" class="btn btn-default">Перенос</a>
-    <a href="/orderStatusSetter/setStatus?id=5&order_id=<?=$orders['id']?>" class="btn btn-danger">Отказ</a>
-    <a href="/orderStatusSetter/setStatus?id=3&order_id=<?=$orders['id']?>" class="btn btn-success">Заказ Выполнен</a>
-</div>
-<br><br><br>
-<form class="col-sm-4 row">
-    <div class="form-group">
-        <label>Ваш комментарий</label>
-        <textarea name="report" id="exampleInputEmail1" class="form-control" rows="3"><?=$orders['report']?></textarea>
+    <form class="col-sm-12 row" action="/orderReportSetter/setReport" method="POST">
+    <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-warning">
+            <input type="radio" name="status_id" value="7" id="option5"> Ремонт
+        </label>
+        <label class="btn btn-default">
+            <input type="radio" name="status_id" value="6" id="option6"> Перенос
+        </label>
+        <label class="btn btn-danger">
+            <input type="radio" name="status_id" value="5" id="option7"> Отказ
+        </label>
+        <label class="btn btn-success">
+            <input type="radio" name="status_id" value="3" id="option8"> Заказ выполнен
+        </label>
     </div>
-    <input name="order_id" type="hidden" value="<?=$orders['id']?>">
-    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <p class="help-block">Чтобы применить статус нажмите кнопку "Сохранить"</p>
+        <div class="col-sm-4 row">
+            <div class="form-group">
+                <label>Ваш комментарий</label>
+                <textarea name="report" id="exampleInputEmail1" class="form-control" rows="3"><?=$orders['report']?></textarea>
+            </div>
+            <input name="id" type="hidden" value="<?=$orders['id']?>">
+            <div class="fluid-fields"></div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
 </form>
+</div>

@@ -44,12 +44,12 @@
                 <br><br><br><br>
             </form>
         </div>
-        <form action="/orders/actionDelete" role="form" method="POST">
+        <form action="/orders/actionTurn" role="form" method="POST">
         <div class="col-sm-12 row">
                 <span>С выбранными:</span>
-                <button type="submit" class="btn_href"> Закрыть выбранные заявки</button>
+                <button name="action" value="close" type="submit" class="btn_href"> Закрыть выбранные заявки</button>
                  /
-                <button type="submit" class="btn_href"> Удалить</button>
+                <button name="action" value="delete" type="submit" class="btn_href"> Удалить</button>
         </div>
     </div>
     <table class="table table-striped">
