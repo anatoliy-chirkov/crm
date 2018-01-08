@@ -14,7 +14,13 @@ class Orders
 
             $rows[$i]['action'] = $this->getActionList($rows[$i]);
 
-            $rows[$i]['status'] = Enum::GRAPHIC_ORDER_STATUS[$rows[$i]['status_id']];
+            if ($rows[$i]['status_id'] == 3) {
+                $rows[$i]['payment_status_id'] = $rows[$i]['payment_status'];
+                $rows[$i]['payment_status'] = Enum::GRAPHIC_PAYMENT_STATUS[$rows[$i]['payment_status']];
+                $rows[$i]['status'] = Enum::GRAPHIC_ORDER_STATUS[$rows[$i]['status_id']].' '.$rows[$i]['payment_status'];
+            } else {
+                $rows[$i]['status'] = Enum::GRAPHIC_ORDER_STATUS[$rows[$i]['status_id']];
+            }
 
             if ($rows[$i]['master_id'] != 0) {
                 $user = (new UserBox)->getProfile($rows[$i]['master_id']);
@@ -22,6 +28,35 @@ class Orders
             } else {
                 $id = $rows[$i]['id'];
                 $rows[$i]['master_id'] = '<a href="/orders/updateMaster?id='.$id.'">Определить</a>';
+            }
+        }
+
+        return $rows;
+    }
+
+    public function getOrdersListByMaster($id)
+    {
+        $sql = "select * from orders where master_id = $id";
+
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+        $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
+        for ($i = 0; $rows[$i]['id'] != null; $i++) {
+
+            $rows[$i]['action'] = $this->getActionList($rows[$i]);
+
+            if ($rows[$i]['status_id'] == 3) {
+                $rows[$i]['payment_status_id'] = $rows[$i]['payment_status'];
+                $rows[$i]['payment_status'] = Enum::GRAPHIC_PAYMENT_STATUS[$rows[$i]['payment_status']];
+                $rows[$i]['status'] = Enum::GRAPHIC_ORDER_STATUS[$rows[$i]['status_id']].' '.$rows[$i]['payment_status'];
+            } else {
+                $rows[$i]['status'] = Enum::GRAPHIC_ORDER_STATUS[$rows[$i]['status_id']];
+            }
+
+            if ($rows[$i]['master_id'] != 0) {
+                $user = (new UserBox)->getProfile($rows[$i]['master_id']);
+                $rows[$i]['master_id'] = $user['first_name'] . $user['second_name'];
             }
         }
 
@@ -50,6 +85,11 @@ class Orders
             $row['report_view'] = 'views/general/admin/orders/reports/afterCall.html';
         } else {
             $row['report_view'] = 'views/general/admin/orders/reports/standart.html';
+        }
+
+        if ($row['status_id'] == 3) {
+            $row['payment_status_id'] = $row['payment_status'];
+            $row['payment_status'] = Enum::GRAPHIC_PAYMENT_STATUS[$row['payment_status']];
         }
 
         $row['status'] = Enum::GRAPHIC_ORDER_STATUS[$row['status_id']];

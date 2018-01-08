@@ -1,20 +1,63 @@
 <div class="orders-admin-all">
     <h2>Заявки</h2>
-    <div class="buttons-case">
-        <div class="users-all-sort form-group col-sm-2 row">
-            <select name="for_roles" class="form-control" id="input3">
-                <option value="0">Сортировка</option>
-                <option value="1">Не распределенные</option>
-                <option value="2">Статус прозвон</option>
-                <option value="3">В ожидании оплаты</option>
-                <option value="4">Отмененные</option>
-            </select>
+    <div class="buttons-case col-sm-12 row">
+        <div class="sort_block col-sm-12">
+            <form action="/orders/index" role="form" method="POST">
+                <div class="col-sm-12 row form-group">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default">
+                        <input type="radio" name="options" id="option1"> Все
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="options" id="option2"> Вчера
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="options" id="option3"> Сегодня
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="options" id="option4"> Неделя
+                    </label>
+                </div>
+                    <div class="dropdown" style="display: inline">
+                        <a class="btn btn-default" data-toggle="dropdown" href="#">Период <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <input type="text" placeholder="01.01.2018 - 01.02.2018" data-range="true" data-multiple-dates-separator=" - " class="datepicker-here"/>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-12 row form-group">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default">
+                            <input type="radio" name="options" id="option5"> Все
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="options" id="option6"> В работе
+                        </label>
+                        <label class="btn btn-warning">
+                            <input type="radio" name="options" id="option7"> Нет оплаты
+                        </label>
+                        <label class="btn btn-danger">
+                            <input type="radio" name="options" id="option8"> Претензии
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group"><h4>Показано записей: <?=$count?></h4></div>
+                <div class="form-group">
+                    <div class="margin_top col-sm-12 row">Выполненные заявки за день:</div>
+                    <div class="col-sm-3 row"><input type="date" class="form-control" id="input3"></div>
+                </div>
+                <br><br><br><br>
+            </form>
         </div>
-        <a href="/orders/add" type="button" class="btn btn-default">Создать заявку</a>
+        <form action="/orders/actionTurn" role="form" method="POST">
+        <div class="col-sm-12 row">
+                <span>С выбранными:</span>
+                <button name="action" value="close" type="submit" class="btn_href"> Закрыть заявки</button>
+        </div>
     </div>
     <table class="table table-striped">
         <tr>
-            <th>#</th>
+            <th>*</th>
             <th>Id</th>
             <th>Дата приезда</th>
             <th>ФИО</th>
@@ -23,20 +66,22 @@
             <th>Мастер</th>
             <th>Статус</th>
             <th>Действия</th>
+            <th>Просмотр</th>
         </tr>
-        <?php foreach($data as $data): ?>
+        <?php foreach($orders as $orders): ?>
         <tr>
-            <td><input type="checkbox" value=""></td>
-            <td><?=$data['id']?></td>
-            <td><?=$data['arrival_date']?> <?=$data['arrival_time']?></td>
-            <td><?=$data['name']?></td>
-            <td><?=$data['adress']?></td>
-            <td><?=$data['problem']?></td>
-            <td><a href="/users/profile?id=<?=$data['id']?>"><?=$data['master_id']?></a></td>
-            <td><?=$data['status_id']?></td>
-            <td><a href="/orders/card?id=<?=$data['id']?>" class="btn btn-default">Посмотр</a></td>
+            <td><div class="form-group"><input type="checkbox" name="id[]" value="<?=$orders['id']?>"></div></td>
+            <td><a href="/orders/card?id=<?=$orders['id']?>"><?=$orders['id']?></a></td>
+            <td><?=$orders['arrival_date']?> <?=$data['arrival_time']?></td>
+            <td><?=$orders['name']?></td>
+            <td><?=$orders['adress']?></td>
+            <td><?=$orders['problem']?></td>
+            <td><a href="/users/profile?id=<?=$orders['id']?>"><?=$orders['master_id']?></a></td>
+            <td><?=$orders['status']?></td>
+            <td><?=$orders['action']?></td>
+            <td><a href="/orders/card?id=<?=$orders['id']?>" class="btn btn-default">Посмотр</a></td>
         </tr>
         <?php endforeach; ?>
     </table>
-
+</form>
 </div>

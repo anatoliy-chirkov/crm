@@ -3,6 +3,9 @@
     <div class="buttons-case">
         <a href="/orders/index" type="button" class="btn btn-default">Назад</a>
         <a href="/orders/edit?id=<?=$_GET['id']?>" type="button" class="btn btn-primary">Редактироваь</a>
+        <?php if($orders['status_id'] == 3 and $orders['payment_status_id'] == 0): ?>
+        <a href="/orderStatusSetter/setPaymentStatus?order_id=<?=$_GET['id']?>" type="button" class="btn btn-warning">Оплачен</a>
+        <?php endif; ?>
     </div>
 
 <!-- Nav tabs -->

@@ -2,6 +2,16 @@
 
 class AuthChecker
 {
+    public static function me()
+    {
+        return new self;
+    }
+
+    public function isMainRole()
+    {
+        return $this->isAdmin() || $this->isOperator();
+    }
+
     public function isHr()
     {
         if ($_SESSION['role'] == 3)

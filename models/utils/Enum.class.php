@@ -35,8 +35,8 @@ class Enum
         8 => '<span class="label label-default">Повтор</span>'
     ),
 
-        ORDER_PAYMENT_STATUS = array(
-        0 => 'В ожидании оплаты',
-        1 => 'Оплачен'
+        GRAPHIC_PAYMENT_STATUS = array(
+        0 => '<span class="label label-warning">Ожидание оплаты</span>',
+        1 => '<span class="label label-success">Оплачен</span>'
     );
 }

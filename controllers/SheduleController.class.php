@@ -4,8 +4,13 @@ class SheduleController
 {
     public function index()
     {
-        $data = new UserBox;
-        $masters = $data->getMasterList();
+        if (AuthChecker::me()->isMainRole()) {
+            $data = new UserBox;
+            $masters = $data->getMasterList();
+        } else {
+            $masters['id'] = $_SESSION['id'];
+            $masters['role'] = $_SESSION['role'];
+        }
 
         Renderer::me()->setUsers($masters)->setPath('shedule/index.html')->render();
     }

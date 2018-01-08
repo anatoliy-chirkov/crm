@@ -1,0 +1,8 @@
+<form class="col-sm-4 row" action="/orderReportSetter/setReportWithoutStatus" role="form" method="POST">
+    <div class="form-group">
+        <label>Ваш комментарий</label>
+        <textarea name="report" id="exampleInputEmail1" class="form-control" rows="3"><?=$orders['report']?></textarea>
+    </div>
+    <input name="order_id" type="hidden" value="<?=$orders['id']?>">
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>

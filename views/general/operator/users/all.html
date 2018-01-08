@@ -1,37 +1,36 @@
 <div class="users-admin-all">
-    <h2>Пользователи</h2>
-    <div class="buttons-case">
-        <div class="users-all-sort form-group col-sm-2 row">
-            <select name="for_roles" class="form-control" id="input3">
-                <option value="0">Сортировка</option>
-                <option value="1">Только мастера</option>
-                <option value="2">Мастера по рейтингу</option>
-                <option value="3">Только администраторы</option>
-                <option value="4">Только HR</option>
-                <option value="4">Только операторы</option>
-            </select>
+    <h2>Пользователи <a href="/users/add" class="btn btn-primary">Создать пользователя</a></h2>
+    <div class="buttons-case col-sm-12 row">
+        <div class="sort_block col-sm-12">
+            <br>
+            <form action="/orders/index" role="form" method="POST">
+                <div class="form-group col-sm-3 row">
+                    <select name="for_roles" class="form-control" id="input3">
+                        <option value="1">Все пользователи</option>
+                        <option value="2">Мастера</option>
+                        <option value="3">Администраторы</option>
+                        <option value="4">HR</option>
+                        <option value="4">Операторы</option>
+                    </select>
+                </div>
+            </form>
         </div>
-        <a href="/users/add" class="btn btn-default">Добавить пользователя</a>
     </div>
     <table class="table table-striped">
         <tr>
+            <th>Тип профиля</th>
+            <th>Логин</th>
             <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Тип</th>
             <th>Телефон</th>
-            <th>Заказы в работе</th>
-            <th>Рейтинг</th>
             <th>Профиль</th>
         </tr>
         <?php foreach ($users as $users): ?>
             <tr>
-                <td><?=$users['first_name']?></td>
-                <td><?=$users['second_name']?></td>
                 <td><?=$users['role']?></td>
+                <td><?=$users['login']?></td>
+                <td><?=$users['first_name'].' '.$users['second_name']?></td>
                 <td><?=$users['phone']?></td>
-                <td><a href="#">4 заказа</a></td>
-                <td>10,81</td>
-                <td><a href="/users/profile?id=<?=$users['id']?>" class="btn btn-default">Просмотр</a></td>
+                <td><a href="/users/profile?id=<?=$users['id']?>" class="btn btn-default">Открыть</a></td>
             </tr>
         <?php endforeach; ?>
     </table>

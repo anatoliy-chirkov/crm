@@ -2,34 +2,41 @@
     <h2><?=$data['role']?> <?=$data['first_name']?> <?=$data['second_name']?></h2>
     <div class="buttons-case">
         <a href="/users/index" type="button" class="btn btn-default">Назад</a>
+        <a href="/users/edit?id=<?=$users['id']?>" type="button" class="btn btn-primary">Редактировать</a>
+        <?php if($users['role_id'] != 5): ?>
+        <a href="/users/actionDelete?id=<?=$users['id']?>" type="button" class="btn btn-danger">Удалить пользователя</a>
+        <?php endif; ?>
     </div>
     <table class="table table-striped">
         <tr>
-            <th>Логин</th><td><?=$users['login']?></td>
+            <td>Тип профиля</td><th><?=$users['role']?></th>
         </tr>
         <tr>
-            <th>Имя</th><td><?=$users['first_name']?></td>
+            <td>Логин</td><th><?=$users['login']?></th>
         </tr>
         <tr>
-            <th>Фамилия</th><td><?=$users['second_name']?></td>
+            <td>Имя</td><th><?=$users['first_name']?></th>
         </tr>
         <tr>
-            <th>Телефон</th><td><?=$users['phone']?></td>
+            <td>Фамилия</td><th><?=$users['second_name']?></th>
         </tr>
         <tr>
-            <th>Ставка</th><td><?=$users['tariff']?></td>
+            <td>Телефон</td><th><?=$users['phone']?></th>
         </tr>
         <tr>
-            <th>Долг в офис</th><td><?=$users['debt']?></td>
+            <td>Ставка</td><th><?=$users['tariff']?></th>
         </tr>
         <tr>
-            <th>Домашний адрес</th><td><?=$users['home_adress']?></td>
+            <td>Долг в офис</td><th><?=$users['debt']?></th>
         </tr>
         <tr>
-            <th>Email</th><td><?=$users['email']?></td>
+            <td>Домашний адрес</td><th><?=$users['home_adress']?></th>
         </tr>
         <tr>
-            <th>Документы</th><td><?=$users['document']?></td>
+            <td>Email</td><th><?=$users['email']?></th>
+        </tr>
+        <tr>
+            <td>Документы</td><th><?=$users['document']?></th>
         </tr>
     </table>
 </div>

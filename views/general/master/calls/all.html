@@ -2,18 +2,20 @@
     <h2>Звонки</h2>
     <table class="table table-striped">
         <tr>
-            <th>Дата</th>
+            <th>Дата и время</th>
             <th>Телефон</th>
-            <th>Кто взял трубку</th>
-            <th>Запись</th>
-            <th>Детали</th>
+            <th>Продолжительность</th>
+            <th>Номер заказа</th>
+            <th>Запись звонка</th>
         </tr>
+        <?php foreach ($calls as $call): ?>
         <tr>
-            <td>25.11.17 18:00</td>
-            <td>+7 (999) 735-67-61</td>
-            <td>Тихон Ловчаков</td>
-            <td>Прослушать</td>
-            <td><a href="#">Подробнее</a></td>
+            <td><?=$call['date']?></td>
+            <td><?=$call['number']?></td>
+            <td><?=$call['duration']?></td>
+            <td><a href="/orders/card?id=<?=$call['order_id']?>"><?=$call['order_id']?></a></td>
+            <td>-</td>
         </tr>
+        <?php endforeach; ?>
     </table>
 </div>

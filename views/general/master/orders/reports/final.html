@@ -1,0 +1,28 @@
+<div class="col-sm-12 row">
+    <form class="col-sm-12 row" action="/orderReportSetter/setReport" method="POST">
+    <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-warning">
+            <input class="status-button" type="radio" name="status_id" value="7" id="option5"> Ремонт
+        </label>
+        <label class="btn btn-default">
+            <input class="status-button" type="radio" name="status_id" value="6" id="option6"> Перенос
+        </label>
+        <label class="btn btn-danger">
+            <input class="status-button" type="radio" name="status_id" value="5" id="option7"> Отказ
+        </label>
+        <label class="btn btn-success">
+            <input class="status-button" type="radio" name="status_id" value="3" id="option8"> Заказ выполнен
+        </label>
+    </div>
+    <p class="help-block">Чтобы применить статус нажмите кнопку "Сохранить"</p>
+        <div class="col-sm-4 row">
+            <div class="form-group">
+                <label>Ваш комментарий</label>
+                <textarea name="report" id="exampleInputEmail1" class="form-control" rows="3"><?=$orders['report']?></textarea>
+            </div>
+            <input name="id" type="hidden" value="<?=$orders['id']?>">
+            <div class="fluid_fields"></div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+</form>
+</div>

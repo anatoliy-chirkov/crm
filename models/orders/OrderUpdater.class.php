@@ -9,7 +9,8 @@ class OrderUpdater
         $sql = "insert into orders 
                 (
                     name, 
-                    phone, 
+                    phone,
+                    home_phone, 
                     metro, 
                     area, 
                     adress, 
@@ -23,7 +24,8 @@ class OrderUpdater
                 ) values 
                 (
                     '$data->name', 
-                    '$data->phone', 
+                    '$data->phone',
+                    '$data->homePhone', 
                     '$data->metro', 
                     '$data->area', 
                     '$data->adress', 
@@ -52,7 +54,8 @@ class OrderUpdater
 
         $sql = "UPDATE orders SET 
                     name = '$data->name', 
-                    phone = '$data->phone', 
+                    phone = '$data->phone',
+                    home_phone = '$data->homePhone', 
                     metro = '$data->metro', 
                     area = '$data->area', 
                     adress = '$data->adress', 

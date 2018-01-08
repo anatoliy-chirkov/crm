@@ -5,6 +5,7 @@ class OrdersDAO
     public $id;
     public $name;
     public $phone;
+    public $homePhone;
     public $arrivalDay;
     public $arrivalTime;
     public $materials;
@@ -36,6 +37,7 @@ class OrdersDAO
         $this->id = $form['id'];
         $this->name = $form['name'];
         $this->phone = $form['phone'];
+        $this->homePhone = $form['home_phone'];
         $this->arrivalDay = $form['arrival_day'];
         $this->arrivalTime = $form['arrival_time'];
         $this->materials = $form['materials'];

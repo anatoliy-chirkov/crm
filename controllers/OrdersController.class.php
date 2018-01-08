@@ -4,7 +4,11 @@ class OrdersController
 {
     public function index()
     {
-        $data = (new Orders)->getOrdersList();
+        if (AuthChecker::me()->isMainRole()) {
+            $data = (new Orders)->getOrdersList();
+        } else {
+            $data = (new Orders)->getOrdersListByMaster($_SESSION['id']);
+        }
 
         Renderer::me()->setOrders($data)->setCountOfElements($data)->setPath('orders/all.html')->render();
     }

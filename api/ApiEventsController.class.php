@@ -61,7 +61,7 @@ class ApiEventsController
             $callData->execute();
             $callData = $callData->fetch(PDO::FETCH_ASSOC);
 
-            $sql = "select id from orders where phone = '$number'";
+            $sql = "select id from orders where phone = '$number' or home_phone = '$number'";
             $orderData = DB::me()->getConnection()->prepare($sql);
             $orderData->execute();
             $orderData = $orderData->fetch(PDO::FETCH_ASSOC);
@@ -71,6 +71,10 @@ class ApiEventsController
 
             if ($id) {
                 $sql = "update calls set end_time = '$data->timestamp' where id = '$id'";
+                $res = DB::me()->getConnection()->prepare($sql);
+                $res->execute();
+
+                $sql = "update orders set status_id = 4 where id = $orderId";
                 $res = DB::me()->getConnection()->prepare($sql);
                 $res->execute();
             } else {

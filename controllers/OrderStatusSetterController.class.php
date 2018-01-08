@@ -19,4 +19,16 @@ class OrderStatusSetterController
 
         header("Location: /orders/index");
     }
+
+    public function setPaymentStatus()
+    {
+        $orderId = $_GET['order_id'];
+
+        $sql = "UPDATE orders SET payment_status = 1 WHERE id = '$orderId'";
+
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+
+        header("Location: /orders/card?id=$orderId");
+    }
 }

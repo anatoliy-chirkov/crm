@@ -4,7 +4,8 @@
     <div class="sort_block col-sm-12">
         <br>
             <div class="form-group col-sm-3 row">
-                <select name="role" class="form-control" id="input7">
+                <select name="role" class="shedule_select form-control" id="input7">
+                    <option value="null">Выберите мастера</option>
                     <?php foreach($users as $user): ?>
                     <option value="<?=$user['id']?>"><?=$user['first_name'].' '.$user['second_name'].' ('.$user['login'].')'?></option>
                     <?php endforeach; ?>
@@ -18,7 +19,8 @@
 
     <div class="col-sm-12 row">
         <br>
-        <button type="button" class="btn btn-primary">Сохранить изменения</button>
+        <button type="button" class="btn btn-primary shedule_button">Сохранить изменения</button>
     </div>
+    <p class="shedule_help help-block"></p>
 
 </div>

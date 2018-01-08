@@ -1,66 +1,26 @@
 <div class="shedule-admin-index">
     <h2>График</h2>
 
-        <div class="buttons-case col-sm-12 row">
+    <div class="sort_block col-sm-12">
+        <br>
             <div class="form-group col-sm-3 row">
-                <label for="input7" class=" control-label">Выберите, график какого мастера показать</label>
-                <select name="role" class="form-control" id="input7">
-                    <option value="0">Выберите</option>
-                    <option value="1">Сергей Иванов</option>
-                    <option value="2">Сергей Петро</option>
-                    <option value="3">Сергей Сергеев</option>
-                    <option value="4">Иван Анчоус</option>
+                <select name="role" class="shedule_select form-control" id="input7">
+                    <option value="null">Выберите мастера</option>
+                    <?php foreach($users as $user): ?>
+                    <option value="<?=$user['id']?>"><?=$user['first_name'].' '.$user['second_name'].' ('.$user['login'].')'?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
-        </div>
-
-    <div class="col-sm-6 row">
-    <table class="table table-bordered">
-        <tr>
-            <th>Пн</th>
-            <th>Вт</th>
-            <th>Ср</th>
-            <th>Чт</th>
-            <th>Пт</th>
-            <th>Сб</th>
-            <th>Вс</th>
-        </tr>
-        <tr>
-            <td>31 сентября<br><br></td>
-            <td>1 ноября<br><br></td>
-            <td>2 ноября<br><br></td>
-            <td>3 ноября<br><br></td>
-            <td>4 ноября<br><br></td>
-            <td>5 ноября<br><br></td>
-            <td>6 ноября<br><br></td>
-        </tr>
-        <tr>
-            <td>7 ноября<br><br></td>
-            <td>8 ноября<br><br></td>
-            <td>9 ноября<br><br></td>
-            <td>10 ноября<br><br></td>
-            <td>11 ноября<br><br></td>
-            <td>12 ноября<br><br></td>
-            <td>13 ноября<br><br></td>
-        </tr>
-        <tr>
-            <td>14 ноября<br><br></td>
-            <td>15 ноября<br><br></td>
-            <td>16 ноября<br><br></td>
-            <td>17 ноября<br><br></td>
-            <td>18 ноября<br><br></td>
-            <td>19 ноября<br><br></td>
-            <td>20 ноября<br><br></td>
-        </tr>
-        <tr>
-            <td>14 ноября<br><br></td>
-            <td>15 ноября<br><br></td>
-            <td>16 ноября<br><br></td>
-            <td>17 ноября<br><br></td>
-            <td>18 ноября<br><br></td>
-            <td>19 ноября<br><br></td>
-            <td>20 ноября<br><br></td>
-        </tr>
-    </table>
     </div>
+
+    <div class="col-sm-12 row">
+        <div class="datepicker-here shedule-calendar"></div>
+    </div>
+
+    <div class="col-sm-12 row">
+        <br>
+        <button type="button" class="btn btn-primary shedule_button">Сохранить изменения</button>
+    </div>
+    <p class="shedule_help help-block"></p>
+
 </div>

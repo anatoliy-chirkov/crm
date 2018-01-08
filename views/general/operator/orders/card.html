@@ -2,90 +2,101 @@
     <h2>Заявка №<?=$orders['id']?></h2>
     <div class="buttons-case">
         <a href="/orders/index" type="button" class="btn btn-default">Назад</a>
+        <a href="/orders/edit?id=<?=$_GET['id']?>" type="button" class="btn btn-primary">Редактироваь</a>
+        <?php if($orders['status_id'] == 3 and $orders['payment_status_id'] == 0): ?>
+        <a href="/orderStatusSetter/setPaymentStatus?order_id=<?=$_GET['id']?>" type="button" class="btn btn-warning">Оплачен</a>
+        <?php endif; ?>
     </div>
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#home" data-toggle="tab">Карточка клиента</a></li>
+    <li class="<?php if($orders['page'] == null) {echo 'active';}?>"><a href="#home" data-toggle="tab">Карточка клиента</a></li>
     <li><a href="#profile" data-toggle="tab">Карточка заказа</a></li>
-    <li><a href="#messages" data-toggle="tab">Отчет о заявке</a></li>
+    <li class="<?php if($orders['page'] == 'report') {echo 'active';}?>"><a href="#messages" data-toggle="tab">Отчет о заявке</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-    <div class="tab-pane active" id="home">
+    <div class="tab-pane <?php if($orders['page'] == null) {echo 'active';}?>" id="home">
         <table class="table table-striped">
             <tr>
-                <th>ФИО</th><td><?=$orders['name']?></td>
+                <td>Источник</td><th><?=$orders['operator_id']?></th>
             </tr>
             <tr>
-                <th>Телефон</th><td><button type="submit" class="btn btn-info">Позвонить</button></td>
+                <td>ФИО клиента</td><th><?=$orders['name']?></th>
             </tr>
             <tr>
-                <th>Дата приезда</th><td><?=$orders['arrival_date']?></td>
+                <td>Телефон</td><th><button type="submit" class="btn btn-info">Позвонить</button></th>
             </tr>
             <tr>
-                <th>Время приезда</th><td><?=$orders['arrival_time']?></td>
+                <td>Метро</td><th></th>
             </tr>
             <tr>
-                <th>Материалы</th><td><?=$orders['materials']?></td>
+                <td>Район</td><th><?=$orders['area']?></th>
             </tr>
             <tr>
-                <th>Оператор</th><td><?=$orders['operator_id']?></td>
+                <td>Адрес</td><th><?=$orders['adress']?></th>
+            </tr>
+            <tr>
+                <td>Дата прибытия</td><th><?=$orders['arrival_date']?></th>
+            </tr>
+            <tr>
+                <td>Время прибытия</td><th><?=$orders['arrival_time']?></th>
+            </tr>
+            <tr>
+                <td>Время подтвержденное мастером</td><th><?=$orders['approve_arrival_time']?></th>
+            </tr>
+            <tr>
+                <td>Описание проблемы</td><th><?=$orders['problem']?></th>
+            </tr>
+            <tr>
+                <td>Дата создания заявки</td><th><?=$orders['order_create']?></th>
             </tr>
         </table>
     </div>
-
 
     <div class="tab-pane" id="profile">
         <table class="table table-striped">
             <tr>
-                <th>Статус</th><td><?=$orders['status_id']?></td>
+                <td>Мастер</td><th><?=$orders['master_id']?></th>
             </tr>
             <tr>
-                <th>Город/Метро</th><td><?=$orders['area']?></td>
+                <td>Статус</td><th><?=$orders['status']?></th>
             </tr>
             <tr>
-                <th>Адрес</th><td><?=$orders['adress']?></td>
+                <td>Исполнение</td><th><?=$orders['performance_status_id']?></th>
             </tr>
             <tr>
-                <th>Проблема</th><td><?=$orders['problem']?></td>
+                <td>Оплата</td><th><?=$orders['payment_status']?></th>
             </tr>
             <tr>
-                <th>Дата создания заявки</th><td><?=$orders['order_create']?></td>
+                <td>Общая сумма (руб)</td><th><?=$orders['order_amount']?></th>
             </tr>
             <tr>
-                <th>Мастер</th><td><?=$orders['master_id']?></td>
+                <td>Расходы (руб)</td><th><?=$orders['expenses_amount']?></th>
             </tr>
             <tr>
-                <th>Ход выполнения</th><td><?=$orders['performance_status_id']?></td>
+                <td>Перечислить в офис</td><th><?=$orders['tax_amount']?></th>
             </tr>
             <tr>
-                <th>Статус оплаты</th><td><?=$orders['payment_status']?></td>
+                <td>Заработок мастера</td><th><?=$orders['salary_amount']?></th>
             </tr>
             <tr>
-                <th>Отчет</th><td><?=$orders['report']?></td>
+                <td>Дата отчета</td><th><?=$orders['report_date']?></th>
             </tr>
             <tr>
-                <th>Дата отчета</th><td><?=$orders['report_date']?></td>
+                <td>Отчет</td><th><?=$orders['report']?></th>
+            </tr>
+            <tr>
+                <td>Дата вируса</td><th></th>
             </tr>
         </table>
     </div>
 
 
-    <div class="tab-pane" id="messages">
+    <div class="tab-pane <?php if($orders['page'] == 'report') {echo 'active';}?>" id="messages">
         <br>
-        <div class="col-sm-12 row">
-            <button type="button" class="btn btn-success">Решено</button>
-            <button type="button" class="btn btn-info">Решаю</button>
-        </div>
-        <br><br><br>
-        <form class="col-sm-4 row">
-            <div class="form-group">
-                <textarea id="exampleInputEmail1" class="form-control" rows="3" placeholder="Результат прозвона"></textarea>
-            </div>
-            <button type="submit" class="btn btn-default">Добавить</button>
-        </form>
+        <?php include($orders['report_view']); ?>
     </div>
 </div>
 </div>
