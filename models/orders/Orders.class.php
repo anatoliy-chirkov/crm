@@ -42,6 +42,8 @@ class Orders
         $res->execute();
         $row = $res->fetch(PDO::FETCH_ASSOC);
 
+        $row['order_create'] = date('j M, G:i ', $row['order_create']);
+
         if ($row['status_id'] == 2) {
             $row['report_view'] = 'views/general/admin/orders/reports/final.html';
         } elseif ($row['status_id'] == 4) {

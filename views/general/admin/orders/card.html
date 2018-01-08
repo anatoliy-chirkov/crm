@@ -41,7 +41,7 @@
                 <td>Время прибытия</td><th><?=$orders['arrival_time']?></th>
             </tr>
             <tr>
-                <td>Время подтвержденное мастером</td><th></th>
+                <td>Время подтвержденное мастером</td><th><?=$orders['approve_arrival_time']?></th>
             </tr>
             <tr>
                 <td>Описание проблемы</td><th><?=$orders['problem']?></th>
@@ -51,7 +51,6 @@
             </tr>
         </table>
     </div>
-
 
     <div class="tab-pane" id="profile">
         <table class="table table-striped">
@@ -68,13 +67,16 @@
                 <td>Оплата</td><th><?=$orders['payment_status']?></th>
             </tr>
             <tr>
-                <td>Сумма (руб)</td><th></th>
+                <td>Общая сумма (руб)</td><th><?=$orders['order_amount']?></th>
             </tr>
             <tr>
-                <td>Перечислить в офис</td><th></th>
+                <td>Расходы (руб)</td><th><?=$orders['expenses_amount']?></th>
             </tr>
             <tr>
-                <td>Заработок мастера</td><th></th>
+                <td>Перечислить в офис</td><th><?=$orders['tax_amount']?></th>
+            </tr>
+            <tr>
+                <td>Заработок мастера</td><th><?=$orders['salary_amount']?></th>
             </tr>
             <tr>
                 <td>Дата отчета</td><th><?=$orders['report_date']?></th>

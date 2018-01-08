@@ -18,7 +18,12 @@
                         <input type="radio" name="options" id="option4"> Неделя
                     </label>
                 </div>
-                    <button type="button" class="btn btn-default">Период <span class="caret"></span></button>
+                    <div class="dropdown" style="display: inline">
+                        <a class="btn btn-default" data-toggle="dropdown" href="#">Период <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <input type="text" placeholder="01.01.2018 - 01.02.2018" data-range="true" data-multiple-dates-separator=" - " class="datepicker-here"/>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-sm-12 row form-group">
                     <div class="btn-group" data-toggle="buttons">
@@ -47,7 +52,9 @@
         <form action="/orders/actionTurn" role="form" method="POST">
         <div class="col-sm-12 row">
                 <span>С выбранными:</span>
-                <button name="action" value="close" type="submit" class="btn_href"> Закрыть выбранные заявки</button>
+                <button name="action" value="hide" type="submit" class="btn_href"> Не показывать мастеру</button>
+                 /
+                <button name="action" value="close" type="submit" class="btn_href"> Закрыть заявки</button>
                  /
                 <button name="action" value="delete" type="submit" class="btn_href"> Удалить</button>
         </div>

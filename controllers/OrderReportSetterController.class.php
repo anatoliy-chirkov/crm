@@ -9,14 +9,37 @@ class OrderReportSetterController
         $report = $_POST['report'];
 
         if ($statusId == 3) {
-            $cash = $_POST['money'];
-            $sql = "UPDATE orders SET status_id = '$statusId', report = '$report' WHERE id = '$orderId'";
+            $orderAmount = $_POST['order_amount'];
+            $expensesAmount = $_POST['expenses_amount'];
+            $finalAmount = $orderAmount - $expensesAmount;
+
+            if ($finalAmount < 10000) {
+                $salaryAmount = $finalAmount * 0.4;
+            } else {
+                $salaryAmount = $finalAmount * 0.5;
+            }
+
+            $taxAmount = $finalAmount - $salaryAmount;
+
+            $sql = "UPDATE orders SET 
+                    status_id = '$statusId', 
+                    report = '$report', 
+                    order_amount = '$orderAmount', 
+                    expenses_amount = '$expensesAmount',
+                    salary_amount = '$salaryAmount',
+                    tax_amount = '$taxAmount' 
+                    WHERE id = '$orderId'";
         } elseif ($statusId == 5) {
             $sql = "UPDATE orders SET status_id = '$statusId', report = '$report' WHERE id = '$orderId'";
         } elseif ($statusId == 6 || $statusId == 7) {
-            $date = $_POST['arrival_day'];
+            $day = $_POST['arrival_day'];
             $time = $_POST['arrival_time'];
-            $sql = "UPDATE orders SET status_id = '$statusId', report = '$report' WHERE id = '$orderId'";
+            $sql = "UPDATE orders SET 
+                    status_id = '$statusId', 
+                    report = '$report',
+                    arrival_day = '$day', 
+                    arrival_time = '$time' 
+                    WHERE id = '$orderId'";
         }
 
         $res = DB::me()->getConnection()->prepare($sql);
