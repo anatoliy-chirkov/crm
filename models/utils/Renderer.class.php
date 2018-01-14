@@ -9,6 +9,7 @@ class Renderer
     public $news;
     public $spreaders;
     public $statuses;
+    public $area;
     public $count;
 
     protected $path;
@@ -60,6 +61,12 @@ class Renderer
         return $this;
     }
 
+    public function setArea($data)
+    {
+        $this->area = $data;
+        return $this;
+    }
+
     public function setCountOfElements($data)
     {
         $this->count = count($data);
@@ -108,6 +115,7 @@ class Renderer
         $news = $this->news;
         $spreaders = $this->spreaders;
         $statuses = $this->statuses;
+        $area = $this->area;
         $count = $this->count;
 
         $menu = $this->getMenu();

@@ -130,6 +130,14 @@ class OrderUpdater
             }
         } elseif ($form['action'] == 'close') {
             return true;
+        } elseif ($form['action'] == 'hide') {
+            $sql = "UPDATE orders SET hide = 1 WHERE id IN ($id)";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
+        } elseif ($form['action'] == 'show') {
+            $sql = "UPDATE orders SET hide = null WHERE id IN ($id)";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
         }
     }
 

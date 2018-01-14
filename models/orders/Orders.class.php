@@ -29,6 +29,10 @@ class Orders
                 $id = $rows[$i]['id'];
                 $rows[$i]['master_id'] = '<a href="/orders/updateMaster?id='.$id.'">Определить</a>';
             }
+
+            if ($rows[$i]['hide'] == 1) {
+                $rows[$i]['status'] = $rows[$i]['status'] . ' <span class="label label-default">Скрыта от мастера</span>';
+            }
         }
 
         return $rows;
@@ -36,7 +40,7 @@ class Orders
 
     public function getOrdersListByMaster($id)
     {
-        $sql = "select * from orders where master_id = $id";
+        $sql = "select * from orders where master_id = $id and (hide is null or hide = 0)";
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();

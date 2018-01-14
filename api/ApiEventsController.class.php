@@ -6,10 +6,13 @@ class ApiEventsController
     {
         $data = $this->parsePostJsonRequest();
 
+        $callId = strval($data->call_id);
         $number = strval($data->from->number);
+        $callState = strval($data->call_state);
 
+        if (strval($data->to->number) == '74994506424') {
 
-            $sql = "select id from spreaders where phone = '$number'";
+            $sql = "select id from spreaders where phone = '$number' and dismissed is null";
             $resultSpreader = DB::me()->getConnection()->prepare($sql);
             $resultSpreader->execute();
             $dataSpreader = $resultSpreader->fetch(PDO::FETCH_ASSOC);
@@ -52,7 +55,39 @@ class ApiEventsController
                     $res = DB::me()->getConnection()->prepare($sql);
                     $res->execute();
                 }
+
+                //Данные запроса
+                $data = array(
+                    'command_id' => 'hangup',
+                    'call_id' => $callId
+                );
+                $jsonData = json_encode($data);
+                $sign = (new ApiController)->sign($jsonData);
+
+                //Собираем данные запроса
+                $hangupRequest = array(
+                    'vpbx_api_key' => 'ntwc8o86aekb8dja2phoc1d1hpj215nf',
+                    'sign' => $sign,
+                    'json' => $jsonData
+                );
+
+                //Формируем запрос и отправляем
+                $post = http_build_query($hangupRequest);
+                $ch = curl_init('https://app.mango-office.ru/vpbx/commands/call/hangup');
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+                $response = curl_exec($ch);
+                curl_close($ch);
+
+                //Записываем лог
+                $response = $response . 'call_id: ' . $callId;
+                $sql = "insert into log (body) values ('$response')";
+                $res = DB::me()->getConnection()->prepare($sql);
+                $res->execute();
+
             }
+        }
 
         if (strval($data->to->number) == '74994509495') {
 
@@ -66,13 +101,22 @@ class ApiEventsController
             $orderData->execute();
             $orderData = $orderData->fetch(PDO::FETCH_ASSOC);
             $orderId = $orderData['id'];
+            if ($orderId == 0)
+                $orderId = null;
 
             $id = $callData['id'];
 
             if ($id) {
-                $sql = "update calls set end_time = '$data->timestamp' where id = '$id'";
-                $res = DB::me()->getConnection()->prepare($sql);
-                $res->execute();
+
+                if ($callState == 'Connected') {
+                    $sql = "update calls set connected_time = '$data->timestamp' where id = '$id'";
+                    $res = DB::me()->getConnection()->prepare($sql);
+                    $res->execute();
+                } elseif ($callState == 'Disconnected') {
+                    $sql = "update calls set end_time = '$data->timestamp' where id = '$id'";
+                    $res = DB::me()->getConnection()->prepare($sql);
+                    $res->execute();
+                }
 
                 $sql = "update orders set status_id = 4 where id = $orderId";
                 $res = DB::me()->getConnection()->prepare($sql);

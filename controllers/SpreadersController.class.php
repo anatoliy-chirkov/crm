@@ -32,6 +32,40 @@ class SpreadersController
         Renderer::me()->setCalls($calls)->setSpreaders($spreader)->setPath('spreaders/calls.html')->render();
     }
 
+    public function dismissed()
+    {
+        $data = new SpreadersBox;
+        $data = $data->getDismissedSpreadersList();
+
+        Renderer::me()->setSpreaders($data)->setPath('spreaders/dismissed.html')->render();
+    }
+
+    public function workArea()
+    {
+        $data = new SpreadersBox;
+        $area = $data->getWorkAreaList($_GET);
+        $spreader = $data->getSpreader($_GET);
+
+        Renderer::me()->setArea($area)->setSpreaders($spreader)->setPath('spreaders/workArea.html')->render();
+    }
+
+    public function workAreaUpdate()
+    {
+        $data = new SpreadersBox;
+        $area = $data->getWorkAreaSingle($_GET);
+        $data = $data->getSpreader($_GET);
+
+        Renderer::me()->setArea($area)->setSpreaders($data)->setPath('spreaders/workAreaUpdate.html')->render();
+    }
+
+    public function workAreaAdd()
+    {
+        $data = new SpreadersBox;
+        $data = $data->getSpreader($_GET);
+
+        Renderer::me()->setSpreaders($data)->setPath('spreaders/addWorkArea.html')->render();
+    }
+
     public function files()
     {
         /*try {
@@ -54,6 +88,20 @@ class SpreadersController
         if ((new SpreadersBox)->addIt($_POST)) {
             header("Location: /spreaders/index");
         }
+    }
+
+    public function actionWorkAreaUpdate()
+    {
+        $id = $_POST['id'];
+        (new SpreadersBox)->updateWorkArea($_POST);
+        header("Location: /spreaders/workArea?id=$id");
+    }
+
+    public function actionWorkAreaAdd()
+    {
+        $id = $_POST['id'];
+        (new SpreadersBox)->addWorkArea($_POST);
+        header("Location: /spreaders/workArea?id=$id");
     }
 
     public function actionDelete()

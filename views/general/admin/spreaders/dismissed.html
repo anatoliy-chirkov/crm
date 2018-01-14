@@ -1,0 +1,28 @@
+<div class="spreaders-hr-index">
+    <h2>Уволенные расклейщики</h2>
+    <div class="buttons-case">
+        <a href="/spreaders/index" type="button" class="users-all-sort btn btn-default">Назад</a>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>ФИО</th>
+            <th>Сколько отработал</th>
+            <th>Район проживания</th>
+            <th>Закрепленная территория</th>
+            <th>Телефон</th>
+            <th>Прикрепленные файлы</th>
+            <th>Действия</th>
+        </tr>
+        <?php foreach ($spreaders as $spreaders): ?>
+        <tr>
+            <td><?=$spreaders['name']?></td>
+            <td><a href="/spreaders/calls?id=<?=$spreaders['id']?>" class="btn btn-info">Посмотреть</a></td>
+            <td><a href="#"><?=$spreaders['home_adress']?></a></td>
+            <td><a href="/spreaders/workArea?id=<?=$spreaders['id']?>" class="btn btn-default">Открыть</a></td>
+            <td><?=$spreaders['phone']?></td>
+            <td><a href="/spreaders/files?id=<?=$spreaders['id']?>">Открыть</a></td>
+            <td><a href="/spreaders/update?id=<?=$spreaders['id']?>">Редактировать</a></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

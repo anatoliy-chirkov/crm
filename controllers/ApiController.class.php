@@ -19,14 +19,18 @@ class ApiController
 
     public function sign($data)
     {
-        $json = json_encode($data);
+        //$json = json_encode($data);
 
         $sign =
             hash(
             "sha256",
-            "ntwc8o86aekb8dja2phoc1d1hpj215nf".$json."o9hnngkokvpjyyjreq5gi88qohifdvkr"
+            "ntwc8o86aekb8dja2phoc1d1hpj215nf".$data."o9hnngkokvpjyyjreq5gi88qohifdvkr"
             )
         ;
+
+        $sql = "insert into log (body) values ('$sign')";
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
 
         return $sign;
     }

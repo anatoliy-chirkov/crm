@@ -4,13 +4,24 @@ class SpreadersBox
 {
     public function getSpreadersList()
     {
-        $sql = "select * from spreaders";
+        $sql = "select * from spreaders where dismissed is null";
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();
         $rows = $res->fetchAll(PDO::FETCH_ASSOC);
 
         //в rows засетить нужные параметры
+        return $rows;
+    }
+
+    public function getDismissedSpreadersList()
+    {
+        $sql = "select * from spreaders where dismissed = 1";
+
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+        $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
         return $rows;
     }
 
@@ -23,6 +34,47 @@ class SpreadersBox
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();
         $row = $res->fetch(PDO::FETCH_ASSOC);
+
+        return $row;
+    }
+
+    public function getWorkAreaList($form)
+    {
+        $id = $form['id'];
+
+        $sql = "select * from spreaders_area where spreader_id = $id";
+
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+        $row = $res->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($row == null) {
+            $sql = "insert into spreaders_area (spreader_id) values ($id)";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
+
+            $sql = "select * from spreaders_area where spreader_id = $id";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
+            $row = $res->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return $row;
+    }
+
+    public function getWorkAreaSingle($form)
+    {
+        $id = $form['id'];
+
+        $sql = "select * from spreaders_area where spreader_id = $id";
+
+        try {
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
+            $row = $res->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $row = null;
+        }
 
         return $row;
     }
@@ -68,6 +120,14 @@ class SpreadersBox
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();
 
+        $lastId = DB::me()->getConnection()->lastInsertId();
+
+        $sql = "insert into spreaders_area (spreader_id) 
+                values ($lastId)";
+
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+
         if ($res != null) {
             return true;
         } else {
@@ -75,11 +135,29 @@ class SpreadersBox
         }
     }
 
+    public function addWorkArea($form)
+    {
+        $mon = $form['mon'];
+        $tue = $form['tue'];
+        $wed = $form['wed'];
+        $thu = $form['thu'];
+        $fri = $form['fri'];
+        $sat = $form['sat'];
+        $sun = $form['sun'];
+        $id = $form['id'];
+
+        $sql = "insert into spreaders_area (spreader_id, mon, tue, wed, thu, fri, sat, sun) 
+                values ($id, '$mon', '$tue', '$wed', '$thu', '$fri', '$sat', '$sun')";
+
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+    }
+
     public function deleteIt($form)
     {
         $data = SpreadersDAO::me()->parseForm($form);
 
-        $sql = "delete from spreaders where id = '$data->id'";
+        $sql = "update spreaders set dismissed = 1 where id = '$data->id'";
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();
@@ -104,6 +182,29 @@ class SpreadersBox
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function updateWorkArea($form)
+    {
+        $mon = $form['mon'];
+        $tue = $form['tue'];
+        $wed = $form['wed'];
+        $thu = $form['thu'];
+        $fri = $form['fri'];
+        $sat = $form['sat'];
+        $sun = $form['sun'];
+        $id = $form['id'];
+
+        $sql = "update spreaders_area set mon='$mon', tue='$tue', wed='$wed', thu='$thu', fri='$fri', sat='$sat', sun='$sun' where spreader_id = $id";
+
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+
+        if ($mon != 0 or $mon != null) {
+            $sql = "update spreaders set area = null where id = $id";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
         }
     }
 }

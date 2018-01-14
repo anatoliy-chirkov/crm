@@ -1,5 +1,5 @@
 <div class="spreaders-hr-index">
-    <h2>Расклейщики <a href="/spreaders/add" class="btn btn-primary">Добавить расклейщика</a></h2>
+    <h2>Расклейщики <a href="/spreaders/add" class="btn btn-primary">Добавить расклейщика</a> <a href="/spreaders/dismissed" class="btn btn-default">Уволенные</a></h2>
     <table class="table table-striped">
         <tr>
             <th>ФИО</th>
@@ -15,9 +15,9 @@
                 <td><?=$spreaders['name']?></td>
                 <td><a href="/spreaders/calls?id=<?=$spreaders['id']?>" class="btn btn-info">Посмотреть</a></td>
                 <td><a href="#"><?=$spreaders['home_adress']?></a></td>
-                <td><a href="#"><?=$spreaders['area']?></a></td>
+                <td><a href="/spreaders/workArea?id=<?=$spreaders['id']?>" class="btn btn-default">Открыть</a></td>
                 <td><?=$spreaders['phone']?></td>
-                <td><a href="/spreaders/files?id=<?=$spreaders['id']?>" class="btn btn-default">Открыть</a></td>
+                <td><a href="/spreaders/files?id=<?=$spreaders['id']?>">Открыть</a></td>
                 <td><a href="/spreaders/update?id=<?=$spreaders['id']?>">Редактировать</a></td>
             </tr>
         <?php endforeach; ?>

@@ -2,7 +2,7 @@
     <h2>Изменить карточку расклейщика</h2>
     <div class="buttons-case">
         <a href="/spreaders/index" type="button" class="users-all-sort btn btn-default">Назад</a>
-        <a href="/spreaders/actionDelete?id=<?=$spreaders['id']?>" type="button" class="btn btn-danger">Удалить расклейщика</a>
+        <a href="/spreaders/actionDelete?id=<?=$spreaders['id']?>" type="button" class="btn btn-danger">Уволить</a>
     </div>
     <form class="col-md-6 row" action="/spreaders/actionUpdate" role="form" method="POST">
 
@@ -23,8 +23,8 @@
         </div>
 
         <div class="form-group">
-            <label for="input5" class=" control-label">Закрепленная территория</label>
-            <input name="area" type="text" class="form-control" id="input5" value="<?=$spreaders['area']?>">
+            <label class=" control-label">Закрепленная территория</label>
+            <a href="/spreaders/workAreaUpdate?id=<?=$spreaders['id']?>">Редактировать</a>
         </div>
 
         <div class="form-group">

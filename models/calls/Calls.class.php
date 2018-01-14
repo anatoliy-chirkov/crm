@@ -28,10 +28,25 @@ class Calls
             if ($row['end_time']) {
 
                 $row['end_time'] = $row['end_time'] + 10800;
-                $period = $row['end_time'] - $row['init_time'];
+                //$period = $row['end_time'] - $row['init_time'];
 
-                $row['duration'] = date('G \ч i \м s \с', $period);
+                if ($row['connected_time']) {
+                    $duration = $row['end_time'] - $row['connected_time'];
+                    $row['duration'] = date('i \м s \с', $duration);
+                } else {
+                    $row['duration'] = 'Пропущенный / Нет данных';
+                }
+
+                //$row['duration'] = date('G \ч i \м s \с', $period);
                 $row['end_time'] = date('G:i', $row['end_time']);
+            }
+
+            if ($row['id'] < 25) {
+                $row['duration'] = 'Нет данных';
+            }
+
+            if ($row['order_id'] == 0) {
+                $row['order_id'] = null;
             }
         }
 

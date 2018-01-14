@@ -1,0 +1,40 @@
+<div class="spreaders-hr-index">
+    <h2>Закрепленная территория</h2>
+    <h4>Расклейщик: <?=$spreaders['name']?></h4>
+    <h4>Район проживания: <?=$spreaders['home_adress']?></h4>
+    <br>
+    <div class="buttons-case">
+        <a href="/spreaders/index" type="button" class="users-all-sort btn btn-default">Назад</a>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Действия</th>
+            <th>ПН</th>
+            <th>ВТ</th>
+            <th>СР</th>
+            <th>ЧТ</th>
+            <th>ПТ</th>
+            <th>СБ</th>
+            <th>ВС</th>
+        </tr>
+        <?php if ($area == null): ?>
+        <tr>
+            <td><a href="/spreaders/workAreaAdd?id=<?=$spreaders['id']?>" type="button" class="users-all-sort btn btn-primary">Добавить</a></td>
+        </tr>
+        <?php endif; ?>
+        <?php foreach ($area as $area): ?>
+        <tr>
+            <td><a href="/spreaders/workAreaUpdate?id=<?=$spreaders['id']?>" type="button" class="users-all-sort btn btn-primary">Изменить</a></td>
+            <td><?=$area['mon']?>
+                <?php if($area['mon'] == null) { echo $spreaders['area'];}
+                elseif($spreaders['area'] == null and $area['mon'] == null) { echo '-';}?></td>
+            <td><?=$area['tue']?><?php if($area['tue'] == null) { echo '-';}?></td>
+            <td><?=$area['wed']?><?php if($area['wed'] == null) { echo '-';}?></td>
+            <td><?=$area['thu']?><?php if($area['thu'] == null) { echo '-';}?></td>
+            <td><?=$area['fri']?><?php if($area['fri'] == null) { echo '-';}?></td>
+            <td><?=$area['sat']?><?php if($area['sat'] == null) { echo '-';}?></td>
+            <td><?=$area['sun']?><?php if($area['sun'] == null) { echo '-';}?></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+</div>
