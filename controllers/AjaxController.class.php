@@ -59,4 +59,136 @@ class AjaxController
     {
         echo json_encode($_SESSION);
     }
+
+    public function getOrders()
+    {
+        $now = time() + 10800;
+
+        if ($_POST['date'] == 'all') {
+
+            $sql = "select * from orders";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
+            $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
+            $this->ordersPartialView(Orders::me()->updateOrdersResult($rows));
+
+        } elseif ($_POST['date'] == 'yesterday') {
+
+            $date = date("Y-m-d", $now);
+            $dateDay = substr($date, 8, 2) - 1;
+            $date = substr($date, 0, 8) . $dateDay;
+
+            $from = strtotime($date . " 00:00:00");
+            $to = strtotime($date . " 23:59:59");
+
+            $sql = "select * from orders where order_create between $from and $to";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
+            $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
+            $this->ordersPartialView(Orders::me()->updateOrdersResult($rows));
+
+        } elseif ($_POST['date'] == 'today') {
+
+            $date = date("Y-m-d", $now);
+
+            $from = strtotime($date . " 00:00:00");
+            $to = strtotime($date . " 23:59:59");
+
+            $sql = "select * from orders where order_create between $from and $to";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
+            $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
+            $this->ordersPartialView(Orders::me()->updateOrdersResult($rows));
+
+        } elseif ($_POST['date'] == 'week') {
+            $dateFrom = date("Y-m-d", $now - 604800);
+            $dateTo = date("Y-m-d", $now);
+
+            $from = strtotime($dateFrom . " 00:00:00");
+            $to = strtotime($dateTo . " 23:59:59");
+
+            $sql = "select * from orders where order_create between $from and $to";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
+            $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
+            $this->ordersPartialView(Orders::me()->updateOrdersResult($rows));
+        }
+
+        if ($_POST['status'] == 'all') {
+            $sql = "select * from orders";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
+            $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
+            $this->ordersPartialView(Orders::me()->updateOrdersResult($rows));
+        } elseif ($_POST['status'] == 'work') {
+            $sql = "select * from orders where status_id = 0";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
+            $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
+            $this->ordersPartialView(Orders::me()->updateOrdersResult($rows));
+        } elseif ($_POST['status'] == 'without_pay') {
+            $sql = "select * from orders where status_id = 3 and payment_status = 0";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
+            $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
+            $this->ordersPartialView(Orders::me()->updateOrdersResult($rows));
+        }
+    }
+
+    public function getOrdersInOneDay()
+    {
+        $from = strtotime($_POST['date'] . " 00:00:00");
+        $to = strtotime($_POST['date'] . " 23:59:59");
+
+        $sql = "select * from orders where status_id = 3 and order_create between $from and $to";
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
+        $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+
+        $this->ordersPartialView(Orders::me()->updateOrdersResult($rows));
+    }
+
+    private function ordersPartialView($orders)
+    {
+        echo
+        '<table class="table table-striped">
+        <tr>
+            <th>*</th>
+            <th>Id</th>
+            <th>Дата приезда</th>
+            <th>ФИО</th>
+            <th>Адрес</th>
+            <th>Описание</th>
+            <th>Мастер</th>
+            <th>Статус</th>
+            <th>Действия</th>
+            <th>Просмотр</th>
+        </tr>';
+
+        foreach($orders as $orders):
+
+        echo '<tr>
+            <td><div class="form-group"><input type="checkbox" name="id[]" value="'.$orders["id"].'"></div></td>
+            <td><a href="/orders/card?id='.$orders["id"].'">'.$orders["id"].'</a></td>
+            <td>'.$orders["arrival_date"].' '.$orders["arrival_time"].'</td>
+            <td>'.$orders["name"].'</td>
+            <td>'.$orders["adress"].'</td>
+            <td>'.$orders["problem"].'</td>
+            <td><a href="/users/profile?id='.$orders["id"].'">'.$orders["master_id"].'</a></td>
+            <td>'.$orders["status"].'</td>
+            <td>'.$orders["action"].'</td>
+            <td><a href="/orders/card?id='.$orders["id"].'" class="btn btn-default">Посмотр</a></td>
+        </tr>';
+        
+        endforeach;
+        
+        echo '</table>';
+    }
 }

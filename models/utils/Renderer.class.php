@@ -124,6 +124,22 @@ class Renderer
         return;
     }
 
+    public function renderPartial()
+    {
+        $orders = $this->orders;
+        $users = $this->users;
+        $calls = $this->calls;
+        $shedule = $this->shedule;
+        $news = $this->news;
+        $spreaders = $this->spreaders;
+        $statuses = $this->statuses;
+        $area = $this->area;
+        $count = $this->count;
+
+        $menu = $this->getMenu();
+        $path = $this->path;
+    }
+
     /*
      * Renderer::me()->setOrders($data)->setUsers($users)->setPath('orders/all.html')->render();
      *

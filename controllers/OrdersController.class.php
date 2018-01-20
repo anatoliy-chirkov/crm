@@ -39,7 +39,9 @@ class OrdersController
         $orderData = new Orders;
         $order = $orderData->getOrderCard();
 
-        Renderer::me()->setOrders($order)->setPath('orders/card.html')->render();
+        $calls = (new Calls)->getCallsListForOrder($_GET['id']);
+
+        Renderer::me()->setOrders($order)->setCalls($calls)->setPath('orders/card.html')->render();
     }
 
     public function actionEdit()
@@ -108,5 +110,15 @@ class OrdersController
 
         (new OrderUpdater)->setReport($_POST);
         header("Location: /orders/card?id=$id");
+    }
+
+    public function actionStopRouting()
+    {
+        $id = $_POST['id'];
+        $stopRouting = $_POST['stop_routing'];
+
+        $sql = "UPDATE orders SET stop_routing = $stopRouting WHERE id = '$id'";
+        $res = DB::me()->getConnection()->prepare($sql);
+        $res->execute();
     }
 }

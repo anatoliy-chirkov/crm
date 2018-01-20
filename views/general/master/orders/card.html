@@ -9,6 +9,7 @@
     <li class="<?php if($orders['page'] == null) {echo 'active';}?>"><a href="#home" data-toggle="tab">Карточка клиента</a></li>
     <li><a href="#profile" data-toggle="tab">Карточка заказа</a></li>
     <li class="<?php if($orders['page'] == 'report') {echo 'active';}?>"><a href="#messages" data-toggle="tab">Отчет о заявке</a></li>
+    <li><a href="#calls" data-toggle="tab">Звонки</a></li>
 </ul>
 
 <!-- Tab panes -->
@@ -94,5 +95,25 @@
         <br>
         <?php include($orders['report_view']); ?>
     </div>
+
+    <div class="tab-pane" id="calls">
+        <table class="table table-striped">
+            <tr>
+                <th>Дата и время</th>
+                <th>Телефон</th>
+                <th>Продолжительность</th>
+                <th>Запись звонка</th>
+            </tr>
+            <?php foreach ($calls as $call): ?>
+            <tr>
+                <td><?=$call['date']?></td>
+                <td><?=$call['number']?></td>
+                <td><?=$call['duration']?></td>
+                <td>-</td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+
 </div>
 </div>

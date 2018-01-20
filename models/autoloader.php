@@ -13,6 +13,7 @@
             'models/utils/',
             'models/spreaders/',
             'models/files/',
+            'models/vats/',
             'controllers/',
             'controllers/auth/',
             'api/'

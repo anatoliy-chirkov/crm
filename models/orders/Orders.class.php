@@ -2,6 +2,11 @@
 
 class Orders
 {
+    public static function me()
+    {
+        return new self;
+    }
+
     public function getOrdersList()
     {
         $sql = "select * from orders";
@@ -10,6 +15,12 @@ class Orders
         $res->execute();
         $rows = $res->fetchAll(PDO::FETCH_ASSOC);
 
+        return
+            $this->updateOrdersResult($rows);
+    }
+
+    public function updateOrdersResult($rows)
+    {
         for ($i = 0; $rows[$i]['id'] != null; $i++) {
 
             $rows[$i]['action'] = $this->getActionList($rows[$i]);

@@ -140,36 +140,4 @@ class OrderUpdater
             $res->execute();
         }
     }
-
-    public function updateOrderPerformanceStatus($form)
-    {
-        $data = OrdersDAO::me()->parseForm($form);
-
-        $sql = "insert performance_status_id into orders values ($data->performanceStatusId) where id = $data->id";
-
-        $res = DB::me()->getConnection()->prepare($sql);
-        $res->execute();
-
-        if ($res != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function updatePaymentStatus($form)
-    {
-        $data = OrdersDAO::me()->parseForm($form);
-
-        $sql = "insert payment_status into orders values ($data->paymentStatus) where id = $data->id";
-
-        $res = DB::me()->getConnection()->prepare($sql);
-        $res->execute();
-
-        if ($res != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

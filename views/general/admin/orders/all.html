@@ -6,35 +6,35 @@
                 <div class="col-sm-12 row form-group">
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-default">
-                        <input type="radio" name="options" id="option1"> Все
+                        <input class="sorting_by_date" value="all" type="radio" name="options" id="option1"> Все
                     </label>
                     <label class="btn btn-default">
-                        <input type="radio" name="options" id="option2"> Вчера
+                        <input class="sorting_by_date" value="yesterday" type="radio" name="options" id="option2"> Вчера
                     </label>
                     <label class="btn btn-default">
-                        <input type="radio" name="options" id="option3"> Сегодня
+                        <input class="sorting_by_date" value="today" type="radio" name="options" id="option3"> Сегодня
                     </label>
                     <label class="btn btn-default">
-                        <input type="radio" name="options" id="option4"> Неделя
+                        <input class="sorting_by_date" value="week" type="radio" name="options" id="option4"> Неделя
                     </label>
                 </div>
                     <div class="dropdown" style="display: inline">
                         <a class="btn btn-default" data-toggle="dropdown" href="#">Период <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                            <input type="text" placeholder="01.01.2018 - 01.02.2018" data-range="true" data-multiple-dates-separator=" - " class="datepicker-here"/>
+                            <input type="text" placeholder="01.01.2018 - 01.02.2018" data-range="true" data-multiple-dates-separator=" - " class="datepicker-here sorting_by_period"/>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-12 row form-group">
                     <div class="btn-group" data-toggle="buttons">
                         <label class="btn btn-default">
-                            <input type="radio" name="options" id="option5"> Все
+                            <input class="sorting_by_status" value="all" type="radio" name="options" id="option5"> Все
                         </label>
                         <label class="btn btn-default">
-                            <input type="radio" name="options" id="option6"> В работе
+                            <input class="sorting_by_status" value="work" type="radio" name="options" id="option6"> В работе
                         </label>
                         <label class="btn btn-warning">
-                            <input type="radio" name="options" id="option7"> Нет оплаты
+                            <input class="sorting_by_status" value="without_pay" type="radio" name="options" id="option7"> Нет оплаты
                         </label>
                         <label class="btn btn-danger">
                             <input type="radio" name="options" id="option8"> Претензии
@@ -44,7 +44,7 @@
                 <div class="form-group"><h4>Показано записей: <?=$count?></h4></div>
                 <div class="form-group">
                     <div class="margin_top col-sm-12 row">Выполненные заявки за день:</div>
-                    <div class="col-sm-3 row"><input type="date" class="form-control" id="input3"></div>
+                    <div class="col-sm-3 row"><input type="date" class="complete_orders_on_day form-control" id="input3"></div>
                 </div>
                 <br><br><br><br>
             </form>
@@ -61,6 +61,7 @@
                 <button name="action" value="delete" type="submit" class="btn_href"> Удалить</button>
         </div>
     </div>
+    <div class="orders-partial">
     <table class="table table-striped">
         <tr>
             <th>*</th>
@@ -78,7 +79,7 @@
         <tr>
             <td><div class="form-group"><input type="checkbox" name="id[]" value="<?=$orders['id']?>"></div></td>
             <td><a href="/orders/card?id=<?=$orders['id']?>"><?=$orders['id']?></a></td>
-            <td><?=$orders['arrival_date']?> <?=$data['arrival_time']?></td>
+            <td><?=$orders['arrival_date']?> <?=$orders['arrival_time']?></td>
             <td><?=$orders['name']?></td>
             <td><?=$orders['adress']?></td>
             <td><?=$orders['problem']?></td>
@@ -89,5 +90,6 @@
         </tr>
         <?php endforeach; ?>
     </table>
+    </div>
 </form>
 </div>

@@ -114,8 +114,8 @@ class SpreadersBox
     {
         $data = SpreadersDAO::me()->parseForm($form);
 
-        $sql = "insert into spreaders (name, home_adress, phone, area) 
-                values ('$data->name', '$data->homeAdress', '$data->phone', '$data->area')";
+        $sql = "insert into spreaders (name, home_adress, phone, area, comment) 
+                values ('$data->name', '$data->homeAdress', '$data->phone', '$data->area', '$data->comment')";
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();
@@ -157,7 +157,11 @@ class SpreadersBox
     {
         $data = SpreadersDAO::me()->parseForm($form);
 
-        $sql = "update spreaders set dismissed = 1 where id = '$data->id'";
+        if ($form['really'] == 1) {
+            $sql = "delete from spreaders where id = '$data->id'";
+        } else {
+            $sql = "update spreaders set dismissed = 1 where id = '$data->id'";
+        }
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();
@@ -173,7 +177,7 @@ class SpreadersBox
     {
         $data = SpreadersDAO::me()->parseForm($form);
 
-        $sql = "update spreaders set name='$data->name', home_adress='$data->homeAdress', phone='$data->phone', area='$data->area' where id = '$data->id'";
+        $sql = "update spreaders set name='$data->name', home_adress='$data->homeAdress', phone='$data->phone', area='$data->area', comment='$data->comment' where id = '$data->id'";
 
         $res = DB::me()->getConnection()->prepare($sql);
         $res->execute();

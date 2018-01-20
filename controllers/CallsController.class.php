@@ -13,4 +13,12 @@ class CallsController
 
         Renderer::me()->setCalls($data)->setPath('calls/all.html')->render();
     }
+
+    public function init()
+    {
+        $orderId = $_GET['order_id'];
+        (new Calls)->init($_SESSION['id'], $_GET['phone']);
+
+        header("Location: /orders/card?id=$orderId");
+    }
 }

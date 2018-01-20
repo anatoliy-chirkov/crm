@@ -14,7 +14,7 @@
             <td><?=$call['number']?></td>
             <td><?=$call['duration']?></td>
             <td><a href="/orders/card?id=<?=$call['order_id']?>"><?=$call['order_id']?></a></td>
-            <td>-</td>
+            <td><?=$call['record']?></td>
         </tr>
         <?php endforeach; ?>
     </table>

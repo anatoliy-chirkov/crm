@@ -10,7 +10,7 @@
             <th>Район проживания</th>
             <th>Закрепленная территория</th>
             <th>Телефон</th>
-            <th>Прикрепленные файлы</th>
+            <th>Комментарий</th>
             <th>Действия</th>
         </tr>
         <?php foreach ($spreaders as $spreaders): ?>
@@ -20,7 +20,7 @@
             <td><a href="#"><?=$spreaders['home_adress']?></a></td>
             <td><a href="/spreaders/workArea?id=<?=$spreaders['id']?>" class="btn btn-default">Открыть</a></td>
             <td><?=$spreaders['phone']?></td>
-            <td><a href="/spreaders/files?id=<?=$spreaders['id']?>">Открыть</a></td>
+            <td><?=$spreaders['comment']?></td>
             <td><a href="/spreaders/update?id=<?=$spreaders['id']?>">Редактировать</a></td>
         </tr>
         <?php endforeach; ?>
