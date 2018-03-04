@@ -110,6 +110,7 @@
     <div class="tab-pane" id="calls">
         <table class="table table-striped">
             <tr>
+                <th>Тип</th>
                 <th>Дата и время</th>
                 <th>Телефон</th>
                 <th>Продолжительность</th>
@@ -117,10 +118,11 @@
             </tr>
             <?php foreach ($calls as $call): ?>
             <tr>
+                <td><?=$call['type']?></td>
                 <td><?=$call['date']?></td>
                 <td><?=$call['number']?></td>
                 <td><?=$call['duration']?></td>
-                <td>-</td>
+                <td><?=$call['record']?></td>
             </tr>
             <?php endforeach; ?>
         </table>

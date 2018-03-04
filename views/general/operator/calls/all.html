@@ -1,21 +1,54 @@
 <div class="calls-admin-all">
     <h2>Звонки</h2>
-    <table class="table table-striped">
-        <tr>
-            <th>Дата и время</th>
-            <th>Телефон</th>
-            <th>Продолжительность</th>
-            <th>Номер заказа</th>
-            <th>Запись звонка</th>
-        </tr>
-        <?php foreach ($calls as $call): ?>
-        <tr>
-            <td><?=$call['date']?></td>
-            <td><?=$call['number']?></td>
-            <td><?=$call['duration']?></td>
-            <td><a href="/orders/card?id=<?=$call['order_id']?>"><?=$call['order_id']?></a></td>
-            <td>-</td>
-        </tr>
-        <?php endforeach; ?>
-    </table>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#home" data-toggle="tab">Входящие</a></li>
+        <li><a href="#profile" data-toggle="tab">Исходящие</a></li>
+    </ul>
+
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="home">
+            <table class="table table-striped">
+                <tr>
+                    <th>Дата и время</th>
+                    <th>Телефон</th>
+                    <th>Продолжительность</th>
+                    <th>Номер заявки</th>
+                    <th>Запись звонка</th>
+                </tr>
+                <?php foreach ($calls as $call): ?>
+                <tr>
+                    <td><?=$call['date']?></td>
+                    <td><?=$call['number']?></td>
+                    <td><?=$call['duration']?></td>
+                    <td><?=$call['order']?></td>
+                    <td><?=$call['record']?></td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+
+        <div class="tab-pane" id="profile">
+            <table class="table table-striped">
+                <tr>
+                    <th>Дата и время</th>
+                    <th>Телефон</th>
+                    <th>Продолжительность</th>
+                    <th>Номер заявки</th>
+                    <th>Запись звонка</th>
+                </tr>
+                <?php foreach ($callsOutgoing as $callOutgoing): ?>
+                <tr>
+                    <td><?=$callOutgoing['date']?></td>
+                    <td><?=$callOutgoing['number']?></td>
+                    <td><?=$callOutgoing['duration']?></td>
+                    <td><?=$callOutgoing['order']?></a></td>
+                    <td><?=$callOutgoing['record']?></td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
+
 </div>

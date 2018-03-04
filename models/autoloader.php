@@ -2,23 +2,9 @@
 
     function __autoload($className)
     {
+        include('/models/core/config/directory.php');
+
         $className = ltrim($className, '\\');
-        $dir  = array(
-            'models/calls/',
-            'models/database/',
-            'models/orders/',
-            'models/shedule/',
-            'models/users/',
-            'models/users/auth/',
-            'models/utils/',
-            'models/spreaders/',
-            'models/files/',
-            'models/vats/',
-            'controllers/',
-            'controllers/auth/',
-            'api/'
-            );
-        $namespace = '';
 
         while (sizeof($dir) != 0) {
 

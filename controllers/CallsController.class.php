@@ -6,12 +6,14 @@ class CallsController
     {
         $data = new Calls;
         if (AuthChecker::me()->isMainRole()) {
-            $data = $data->getCallsList();
+            $calls = $data->getCallsList();
+            $callsOutgoing = $data->getCallsList($outgoing = 1);
         } else {
-            $data = $data->getCallsListForMaster($_SESSION['id']);
+            $calls = $data->getCallsListForMaster($_SESSION['id']);
+            $callsOutgoing = $data->getCallsListForMaster($_SESSION['id'], $outgoing = 1);
         }
 
-        Renderer::me()->setCalls($data)->setPath('calls/all.html')->render();
+        Renderer::me()->setCalls($calls)->setCallsOutgoing($callsOutgoing)->setPath('calls/all.html')->render();
     }
 
     public function init()

@@ -7,8 +7,51 @@ class VatsHandler
         return new self;
     }
 
+    public function handleOutgoingCall($call)
+    {
+        /** В течении 1 звонка поступает несолько уведомлений */
+        $sql = "select id from calls where call_id = '$call->callId'";
+        $callData = DB::me()->getConnection()->prepare($sql);
+        $callData->execute();
+        $callData = $callData->fetch(PDO::FETCH_ASSOC);
+
+        $sql = "select * from orders where phone = '$call->toPhone' or home_phone = '$call->toPhone'";
+        $orderData = DB::me()->getConnection()->prepare($sql);
+        $orderData->execute();
+        $orderData = $orderData->fetch(PDO::FETCH_ASSOC);
+        $orderId = $orderData['id'];
+
+        /** Если это не первый запрос по заданному звонку - обновляем данные по этому 1 звонку */
+        $id = $callData['id'];
+
+        if (isset($id)) {
+
+            if ($call->callState == 'Connected') {
+                $sql = "update calls set connected_time = '$call->time' where id = '$id'";
+                $res = DB::me()->getConnection()->prepare($sql);
+                $res->execute();
+            } elseif ($call->callState == 'Disconnected') {
+                $sql = "update calls set end_time = '$call->time', number = '$call->toPhone', order_id = '$orderId' where id = '$id'";
+                $res = DB::me()->getConnection()->prepare($sql);
+                $res->execute();
+            }
+
+            $sql = "update orders set status_id = 4 where id = $orderId";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
+        } else {
+            $sql = "insert into calls (number, init_time, call_id, order_id, outgoing) values ('$call->toPhone', '$call->time', '$call->callId', '$orderId', 1)";
+            $res = DB::me()->getConnection()->prepare($sql);
+            $res->execute();
+
+            //VatsRequestBuilder::init()->startRecording($call->callIdReal, VatsApi::PHONE_FOR_CLIENTS);
+            VatsRequestBuilder::init()->startRecording($call->callIdReal, $call->toPhone);
+        }
+    }
+
     public function handleClientCall($call)
     {
+        /** В течении 1 звонка поступает несолько уведомлений */
         $sql = "select id from calls where call_id = '$call->callId'";
         $callData = DB::me()->getConnection()->prepare($sql);
         $callData->execute();
@@ -27,6 +70,7 @@ class VatsHandler
         $orderData = $orderData->fetch(PDO::FETCH_ASSOC);
         $masterPhone = $orderData['phone'];
 
+        /** Если это не первый запрос по заданному звонку - обновляем данные по этому 1 звонку */
         $id = $callData['id'];
 
         if (isset($id)) {
@@ -36,7 +80,7 @@ class VatsHandler
                 $res = DB::me()->getConnection()->prepare($sql);
                 $res->execute();
             } elseif ($call->callState == 'Disconnected') {
-                $sql = "update calls set end_time = '$call->time' where id = '$id'";
+                $sql = "update calls set end_time = '$call->time', number = '$call->fromPhone', order_id = '$orderId' where id = '$id'";
                 $res = DB::me()->getConnection()->prepare($sql);
                 $res->execute();
             }
@@ -53,10 +97,10 @@ class VatsHandler
         $stopRouting = $orderData['stop_routing'];
 
         if ($stopRouting == 0 || $stopRouting == null) {
-            VatsRequestBuilder::init()->routeCall($call->callId, $masterPhone);
+            VatsRequestBuilder::init()->routeCall($call->callIdReal, $masterPhone);
         }
 
-        VatsRequestBuilder::init()->startRecording($call->callId, VatsApi::REAL_PHONE_MAIN);
+        VatsRequestBuilder::init()->startRecording($call->callIdReal, VatsApi::REAL_PHONE_MAIN);
     }
 
     public function handleSpreaderCall($call)

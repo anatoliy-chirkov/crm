@@ -15,7 +15,8 @@ class VatsRequestParser
 
         $requestData->toPhone = strval($data->to->number);
         $requestData->fromPhone = strval($data->from->number);
-        $requestData->callId = strval($data->call_id);
+        $requestData->callId = strval($data->entry_id);
+        $requestData->callIdReal = strval($data->call_id);
         $requestData->callState = strval($data->call_state);
         $requestData->time = $data->timestamp;
 
@@ -30,6 +31,7 @@ class VatsRequestParser
 
         $requestData->recordingId = strval($data->recording_id);
         $requestData->recordingState = strval($data->recording_state);
+        $requestData->entryId = strval($data->entry_id);
         $requestData->callId = strval($data->call_id);
 
         return $requestData;

@@ -159,6 +159,8 @@ class SpreadersBox
 
         if ($form['really'] == 1) {
             $sql = "delete from spreaders where id = '$data->id'";
+        } elseif ($form['cancel'] == 1) {
+            $sql = "update spreaders set dismissed = null where id = '$data->id'";
         } else {
             $sql = "update spreaders set dismissed = 1 where id = '$data->id'";
         }

@@ -18,8 +18,10 @@
                 <td><a href="/spreaders/workArea?id=<?=$spreaders['id']?>" class="btn btn-default">Открыть</a></td>
                 <td><?=$spreaders['phone']?></td>
                 <td><?=$spreaders['comment']?></td>
-                <td><br>
-                    <a href="/spreaders/actionDelete?id=<?=$spreaders['id']?>&really=1">Удалить</a></td>
+                <td><a href="/spreaders/update?id=<?=$spreaders['id']?>">Редактировать</a>
+                    <br>
+                    <a href="/spreaders/actionDelete?id=<?=$spreaders['id']?>&really=1">Удалить</a>
+                </td>
             </tr>
         <?php endforeach; ?>
     </table>

@@ -83,7 +83,7 @@ class VatsRequestBuilder extends AutoVatsRequestBuilder
      */
     public function getRecordingLink($recordingId)
     {
-        $time = time() + 300;
+        $time = time() + 11200;
         $sign =
             hash(
                 "sha256",

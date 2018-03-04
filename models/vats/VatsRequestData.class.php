@@ -3,6 +3,8 @@
 class VatsRequestData
 {
     public $callId;
+    public $entryId;
+    public $callIdReal;
     public $fromPhone;
     public $toPhone;
     public $time;

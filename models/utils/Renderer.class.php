@@ -5,6 +5,7 @@ class Renderer
     public $orders;
     public $users;
     public $calls;
+    public $callsOutgoing;
     public $shedule;
     public $news;
     public $spreaders;
@@ -34,6 +35,12 @@ class Renderer
     public function setCalls($data)
     {
         $this->calls = $data;
+        return $this;
+    }
+
+    public function setCallsOutgoing($data)
+    {
+        $this->callsOutgoing = $data;
         return $this;
     }
 
@@ -111,6 +118,7 @@ class Renderer
         $orders = $this->orders;
         $users = $this->users;
         $calls = $this->calls;
+        $callsOutgoing = $this->callsOutgoing;
         $shedule = $this->shedule;
         $news = $this->news;
         $spreaders = $this->spreaders;
